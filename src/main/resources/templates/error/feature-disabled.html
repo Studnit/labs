@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Module unavailable', ~{::section})}">
+<body>
+<section>
+<div class="card mx-auto" style="max-width:560px">
+  <div class="empty py-5">
+    <i class="bi bi-toggle-off"></i>
+    <h2 class="h5 text-dark" th:text="${feature.label} + ' is turned off'">Module is turned off</h2>
+    <p class="mb-3">This module is not enabled for your library. Contact your library admin if you need it.</p>
+    <a class="btn btn-primary" th:href="@{/dashboard}">Back to dashboard</a>
+  </div>
+</div>
+</section>
+</body>
+</html>

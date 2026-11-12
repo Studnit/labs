@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Welcome', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title" th:text="'Welcome, ' + ${@nav.userName()}">Welcome</h2>
+  <p class="page-sub">You have a guest account. Ask the library desk to upgrade you to a member for attendance, seats and community features.</p></div>
+<h3 class="h6 text-uppercase text-muted mb-2">Available to you</h3>
+<div class="mb-4" th:replace="~{fragments/components :: featureTiles}"></div>
+<div class="row g-3">
+  <div class="col-lg-7"><div class="card"><div class="card-header">Library announcements</div>
+    <div class="list-group list-group-flush">
+      <div class="list-group-item" th:each="a : ${announcements}"><div class="fw-semibold" th:text="${a.title}">Title</div><div class="small text-muted" th:text="${a.body}">body</div></div>
+      <th:block th:if="${announcements.isEmpty()}"><div th:replace="~{fragments/components :: empty('No announcements yet','bi-megaphone')}"></div></th:block>
+    </div></div></div>
+  <div class="col-lg-5"><div class="card"><div class="card-body">
+    <h3 class="h6">Library</h3>
+    <p class="mb-1 fw-semibold" th:text="${currentLibrary != null} ? ${currentLibrary.name} : ${@nav.libraryName()}">Library</p>
+    <p class="text-muted small mb-3">Browse the catalogue to see what we have on our shelves.</p>
+    <a class="btn btn-primary" th:if="${@features.on('BOOK_MANAGEMENT')}" th:href="@{/books}"><i class="bi bi-book me-1"></i>Browse books</a>
+  </div></div></div>
+</div>
+</section>
+</body>
+</html>

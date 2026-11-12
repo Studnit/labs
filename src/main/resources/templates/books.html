@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Books', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Books</h2><p class="page-sub">Search the catalogue and check availability.</p></div>
+  <div class="d-flex gap-2" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')">
+    <a class="btn btn-outline-primary" th:href="@{/books/issues}"><i class="bi bi-arrow-left-right me-1"></i>Issue / return</a>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookModal"><i class="bi bi-plus-lg me-1"></i>Add book</button></div>
+  <a class="btn btn-outline-primary" sec:authorize="hasRole('MEMBER')" th:href="@{/books/mine}">My books</a>
+</div>
+<form class="card card-body mb-3" method="get" th:action="@{/books}"><div class="input-group">
+  <input class="form-control" name="q" th:value="${q}" placeholder="Search title, author, ISBN or category"><button class="btn btn-primary"><i class="bi bi-search"></i></button></div></form>
+<div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
+  <thead><tr><th>Title</th><th class="d-none d-md-table-cell">Author</th><th class="d-none d-lg-table-cell">Category</th><th class="d-none d-lg-table-cell">Shelf</th><th>Available</th><th sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')"></th></tr></thead><tbody>
+  <tr th:each="b : ${books}"><td><div class="fw-semibold" th:text="${b.title}">t</div><div class="small text-muted" th:text="${b.isbn}">isbn</div></td>
+    <td class="d-none d-md-table-cell" th:text="${b.author}">a</td><td class="d-none d-lg-table-cell" th:text="${b.category}">c</td><td class="d-none d-lg-table-cell" th:text="${b.shelf}">s</td>
+    <td><span class="badge" th:classappend="${b.availableCopies > 0} ? 'text-bg-success' : 'text-bg-danger'" th:text="${b.availableCopies} + ' / ' + ${b.totalCopies}">1/1</span></td>
+    <td class="text-end text-nowrap" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')">
+      <button class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#bookModal" th:attr="data-id=${b.id},data-title=${b.title},data-author=${b.author},data-isbn=${b.isbn},data-category=${b.category},data-shelf=${b.shelf},data-copies=${b.totalCopies}"><i class="bi bi-pencil"></i></button>
+      <form class="d-inline" th:action="@{/books/{id}/delete(id=${b.id})}" method="post" data-confirm="Delete this book?"><button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i></button></form></td></tr>
+  <tr th:if="${books.isEmpty()}"><td colspan="6"><div th:replace="~{fragments/components :: empty('No books found','bi-book')}"></div></td></tr></tbody></table></div></div>
+
+<div class="modal fade" id="bookModal" tabindex="-1" aria-hidden="true" data-fill sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/books/save}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Book</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><input type="hidden" name="id">
+    <div class="mb-3"><label class="form-label" for="b-title">Title</label><input id="b-title" name="title" class="form-control" required maxlength="200"></div>
+    <div class="row g-3"><div class="col-md-6"><label class="form-label" for="b-author">Author</label><input id="b-author" name="author" class="form-control" maxlength="150"></div>
+      <div class="col-md-6"><label class="form-label" for="b-isbn">ISBN</label><input id="b-isbn" name="isbn" class="form-control" maxlength="30"></div>
+      <div class="col-md-4"><label class="form-label" for="b-cat">Category</label><input id="b-cat" name="category" class="form-control" maxlength="80"></div>
+      <div class="col-md-4"><label class="form-label" for="b-shelf">Shelf</label><input id="b-shelf" name="shelf" class="form-control" maxlength="30"></div>
+      <div class="col-md-4"><label class="form-label" for="b-copies">Copies</label><input id="b-copies" name="copies" type="number" min="0" class="form-control" data-default="1" required></div></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Save</button></div></form></div></div>
+</section>
+</body>
+</html>

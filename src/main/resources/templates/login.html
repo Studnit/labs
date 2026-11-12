@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/public :: shell('Sign in', ~{::section})}">
+<body>
+<section>
+<div class="auth-wrap">
+  <div class="card auth-card">
+    <div class="text-center mb-4">
+      <div class="avatar mx-auto mb-2" style="width:52px;height:52px;font-size:1.5rem"><i class="bi bi-book-half"></i></div>
+      <h1 class="h4 fw-bold mb-0">Welcome back</h1>
+      <p class="text-muted mb-0">Sign in to Smart Library</p>
+    </div>
+    <div th:if="${success}" class="alert alert-success" th:text="${success}"></div>
+    <div th:if="${param.logout}" class="alert alert-info">You have been signed out.</div>
+    <div th:if="${param.error}" class="alert alert-danger" role="alert">
+      <span th:switch="${param.error[0]}">
+        <span th:case="'locked'">Too many failed attempts. Try again in 15 minutes.</span>
+        <span th:case="'pending'">Your membership is awaiting approval by the library.</span>
+        <span th:case="'disabled'">This account is not active. Contact your library.</span>
+        <span th:case="*">Incorrect email or password.</span>
+      </span>
+    </div>
+    <form th:action="@{/login}" method="post" novalidate>
+      <div class="mb-3"><label class="form-label" for="username">Email</label>
+        <input id="username" name="username" type="email" class="form-control form-control-lg" autocomplete="username" required autofocus></div>
+      <div class="mb-3"><label class="form-label" for="password">Password</label>
+        <input id="password" name="password" type="password" class="form-control form-control-lg" autocomplete="current-password" required></div>
+      <button class="btn btn-primary btn-lg w-100" type="submit">Sign in</button>
+    </form>
+    <p class="text-center text-muted mt-3 mb-0">New here? <a th:href="@{/register}">Create an account</a></p>
+    <div class="card mt-3 border-primary-subtle" th:if="${demo}">
+      <div class="card-body p-3">
+        <div class="fw-semibold mb-2"><i class="bi bi-lightning-charge text-primary"></i> Demo accounts <span class="text-muted fw-normal small">(click to fill)</span></div>
+        <div class="d-grid gap-1 small">
+          <button type="button" class="btn btn-sm btn-light text-start" data-demo-email="admin@abhyasika.local" data-demo-pass="Admin#12345"><strong>Library Admin</strong> · admin@abhyasika.local</button>
+          <button type="button" class="btn btn-sm btn-light text-start" data-demo-email="librarian@abhyasika.local" data-demo-pass="Libra#12345"><strong>Librarian</strong> · librarian@abhyasika.local</button>
+          <button type="button" class="btn btn-sm btn-light text-start" data-demo-email="member1@abhyasika.local" data-demo-pass="Member#12345"><strong>Member</strong> · member1@abhyasika.local</button>
+          <button type="button" class="btn btn-sm btn-light text-start" th:attr="data-demo-email=${superEmail},data-demo-pass='ChangeMe#2026'"><strong>Super Admin</strong> · <span th:text="${superEmail}">email</span></button>
+        </div>
+        <div class="form-text mt-2">Demo library "Bhagat Singh Abhyasika". Visitor check-in: <a th:href="@{/g/bhagatsingh}">/g/bhagatsingh</a>. Disable with SEED_DEMO=false.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('[data-demo-email]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.getElementById('username').value = b.dataset.demoEmail;
+      document.getElementById('password').value = b.dataset.demoPass;
+    });
+  });
+</script>
+</section>
+</body>
+</html>

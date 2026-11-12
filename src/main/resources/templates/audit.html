@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Audit log', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Audit log</h2><p class="page-sub">Security-relevant and administrative actions.</p></div>
+<div class="card"><div class="table-responsive"><table class="table table-sm table-hover mb-0">
+  <thead><tr><th>Time</th><th>Actor</th><th>Action</th><th class="d-none d-md-table-cell">Details</th><th class="d-none d-lg-table-cell">IP</th></tr></thead><tbody>
+  <tr th:each="l : ${logs}"><td class="text-nowrap" th:text="${#temporals.format(l.createdAt,'dd MMM yy HH:mm:ss')}">t</td><td th:text="${l.actorName}">a</td>
+    <td><code th:text="${l.action}">ACTION</code></td><td class="d-none d-md-table-cell small" th:text="${l.details}">d</td><td class="d-none d-lg-table-cell small text-muted" th:text="${l.ip}">ip</td></tr>
+  <tr th:if="${logs.isEmpty()}"><td colspan="5"><div th:replace="~{fragments/components :: empty('No entries yet','bi-shield-check')}"></div></td></tr></tbody></table></div></div>
+</section>
+</body>
+</html>

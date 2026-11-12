@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Discussion forum', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Discussion forum</h2><p class="page-sub">Ask questions and help others.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ask"><i class="bi bi-plus-lg me-1"></i>Ask a question</button>
+</div>
+<div class="row g-3">
+  <div class="col-lg-3"><div class="card"><div class="card-header">Categories</div><div class="list-group list-group-flush">
+    <a class="list-group-item list-group-item-action" th:classappend="${category == null} ? 'active'" th:href="@{/forum}">All questions</a>
+    <a class="list-group-item list-group-item-action" th:each="c : ${categories}" th:classappend="${category == c.id} ? 'active'" th:href="@{/forum(category=${c.id})}" th:text="${c.name}">Cat</a></div>
+    <div class="card-body border-top" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')"><form th:action="@{/forum/categories}" method="post" class="d-flex gap-2">
+      <input name="name" class="form-control form-control-sm" placeholder="New category" maxlength="80" required aria-label="Category name"><button class="btn btn-sm btn-outline-primary">Add</button></form></div></div></div>
+  <div class="col-lg-9"><div class="card"><div class="list-group list-group-flush">
+    <a th:each="r : ${rows}" class="list-group-item list-group-item-action" th:href="@{/forum/q/{id}(id=${r.q().id})}">
+      <div class="d-flex justify-content-between gap-2"><div class="fw-semibold" th:text="${r.q().title}">Question</div>
+        <span class="badge rounded-pill" th:classappend="${r.q().resolved} ? 'text-bg-success' : 'text-bg-secondary'" th:text="${r.answers()} + (${r.answers() == 1} ? ' answer' : ' answers')">0</span></div>
+      <div class="small text-muted"><span th:if="${r.q().category != null}" th:text="${r.q().category.name} + ' · '">cat</span><span th:text="${r.q().author.fullName} + ' · ' + ${#temporals.format(r.q().createdAt,'dd MMM yyyy')}">meta</span></div></a>
+    <th:block th:if="${rows.isEmpty()}"><div th:replace="~{fragments/components :: empty('No questions yet','bi-question-circle')}"></div></th:block></div></div>
+    <div class="d-flex justify-content-between mt-3"><a class="btn btn-light" th:if="${page > 0}" th:href="@{/forum(category=${category},page=${page - 1})}">Newer</a><span></span>
+      <a class="btn btn-light" th:if="${rows.size() == 20}" th:href="@{/forum(category=${category},page=${page + 1})}">Older</a></div></div>
+</div>
+<div class="modal fade" id="ask" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-lg"><form class="modal-content" th:action="@{/forum/ask}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Ask a question</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="mb-3"><label class="form-label" for="q-cat">Category</label><select id="q-cat" name="categoryId" class="form-select"><option value="">General</option><option th:each="c : ${categories}" th:value="${c.id}" th:text="${c.name}">c</option></select></div>
+    <div class="mb-3"><label class="form-label" for="q-title">Title</label><input id="q-title" name="title" class="form-control" required maxlength="200"></div>
+    <div><label class="form-label" for="q-body">Details</label><textarea id="q-body" name="body" class="form-control" rows="5" required maxlength="5000"></textarea></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Post question</button></div></form></div></div>
+</section>
+</body>
+</html>

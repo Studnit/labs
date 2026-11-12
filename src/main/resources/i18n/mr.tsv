@@ -1,0 +1,774 @@
+# English<TAB>Marathi — exact phrases. Add more lines to translate more text.
+Library modules	ग्रंथालय मॉड्यूल
+Turn features on or off for your library. Disabled modules disappear from the interface and their pages and APIs stop working immediately.	तुमच्या ग्रंथालयासाठी सुविधा चालू किंवा बंद करा. बंद केलेले मॉड्यूल स्क्रीनवरून नाहीसे होतात आणि त्यांची पाने व API लगेच बंद होतात.
+Module	मॉड्यूल
+Enabled	चालू
+Disabled	बंद
+Modules	मॉड्यूल
+Library settings	ग्रंथालय सेटिंग्ज
+Library name	ग्रंथालयाचे नाव
+Address	पत्ता
+Phone	फोन
+Email	ईमेल
+UPI ID	UPI आयडी
+Opens	उघडण्याची वेळ
+Closes	बंद होण्याची वेळ
+Fine / day (₹)	दंड / दिवस (₹)
+Loan days	कर्ज दिवस
+Visitor registration link:	अभ्यागत नोंदणी दुवा:
+Save settings	सेटिंग्ज जतन करा
+Staff accounts	कर्मचारी खाती
+Add staff	कर्मचारी जोडा
+Full name	पूर्ण नाव
+Temporary password	तात्पुरता पासवर्ड
+Role	भूमिका
+Librarian	ग्रंथपाल
+Library admin	ग्रंथालय प्रशासक
+Create account	खाते तयार करा
+Name	नाव
+Staff	कर्मचारी
+Announcements	घोषणा
+New announcement	नवीन घोषणा
+Title	शीर्षक
+Message	संदेश
+Pin to top	वर पिन करा
+Publish & notify everyone	प्रकाशित करा आणि सर्वांना कळवा
+Delete this announcement?	ही घोषणा हटवायची?
+No announcements yet	अजून कोणत्याही घोषणा नाहीत
+My attendance	माझी उपस्थिती
+Scan to check in/out	चेक-इन/आउट साठी स्कॅन करा
+You are checked in	तुम्ही चेक-इन केले आहे
+since	पासून
+History	इतिहास
+Date	तारीख
+In	आत
+Out	बाहेर
+Duration	कालावधी
+Method	पद्धत
+QR	QR
+Attendance	उपस्थिती
+No visits yet	अजून कोणत्याही भेटी नाहीत
+Entrance QR code	प्रवेशद्वार QR कोड
+Print and place at the entrance. Members scan it to check in and out.	छापून प्रवेशद्वारावर लावा. सदस्य चेक-इन आणि चेक-आउटसाठी तो स्कॅन करतात.
+Print	छापा
+Regenerate	पुन्हा तयार करा
+Library	ग्रंथालय
+Scan to check in / check out	चेक-इन / चेक-आउटसाठी स्कॅन करा
+Regenerate the QR? The printed code will stop working.	QR पुन्हा तयार करायचा? छापलेला कोड चालणार नाही.
+Attendance QR code	उपस्थिती QR कोड
+Entrance QR	प्रवेश QR
+Go	जा
+Only members can check in with the QR code.	फक्त सदस्यच QR कोडने चेक-इन करू शकतात.
+You are checked in since	तुम्ही चेक-इन केले आहे, वेळ:
+You are not checked in.	तुम्ही चेक-इन केलेले नाही.
+Check out	चेक-आउट
+Check in	चेक-इन
+Check in / out	चेक-इन / आउट
+Scan library QR	ग्रंथालयाचा QR स्कॅन करा
+Works on every phone and browser. Point the camera at the code at the library entrance.	प्रत्येक फोन आणि ब्राउझरवर चालते. ग्रंथालयाच्या प्रवेशद्वारावरील कोडकडे कॅमेरा धरा.
+Starting camera…	कॅमेरा सुरू होत आहे…
+Restart camera	कॅमेरा पुन्हा सुरू करा
+Upload a photo of the QR	QR चा फोटो अपलोड करा
+Take a picture with your phone camera (or choose one from the gallery) and we will read it.	फोनच्या कॅमेऱ्याने फोटो काढा (किंवा गॅलरीतून निवडा), आम्ही तो वाचू.
+Enter the code or link	कोड किंवा दुवा टाका
+Paste the link or the 32-character code shown under the entrance QR.	प्रवेश QR खाली दिलेला दुवा किंवा 32 अक्षरी कोड येथे टाका.
+Scan QR	QR स्कॅन करा
+Who is in the library right now, and today's visits.	सध्या ग्रंथालयात कोण आहे आणि आजच्या भेटी.
+Manual check-in	हाताने चेक-इन
+In library now	आता ग्रंथालयात
+Today's log	आजची नोंद
+Member	सदस्य
+Minutes	मिनिटे
+Choose…	निवडा…
+Time (leave empty for now)	वेळ (आत्ताची वेळ हवी असल्यास रिकामे ठेवा)
+Note	टीप
+Cancel	रद्द करा
+e.g. forgot phone	उदा. फोन विसरला
+Nobody is checked in	कोणीही चेक-इन केलेले नाही
+No visits today	आज कोणत्याही भेटी नाहीत
+Audit log	ऑडिट नोंद
+Security-relevant and administrative actions.	सुरक्षा आणि प्रशासकीय कृती.
+Time	वेळ
+Actor	कर्ता
+Action	कृती
+Details	तपशील
+IP	IP
+No entries yet	अजून नोंदी नाहीत
+Catalogue	सूची
+Issue & return	देणे आणि परत घेणे
+Issue a book	पुस्तक द्या
+Book	पुस्तक
+Days	दिवस
+Issue	द्या
+Currently issued	सध्या दिलेली
+Issued	दिले
+Due	देय
+Overdue	मुदत उलटलेली
+Return	परत
+No books are out	कोणतीही पुस्तके बाहेर नाहीत
+Books	पुस्तके
+Search the catalogue and check availability.	सूची शोधा आणि उपलब्धता तपासा.
+Issue / return	देणे / परत घेणे
+Add book	पुस्तक जोडा
+My books	माझी पुस्तके
+Author	लेखक
+Category	वर्ग
+Shelf	कपाट
+Available	उपलब्ध
+ISBN	ISBN
+Copies	प्रती
+Save	जतन करा
+Search title, author, ISBN or category	शीर्षक, लेखक, ISBN किंवा वर्ग शोधा
+Delete this book?	हे पुस्तक हटवायचे?
+No books found	पुस्तके सापडली नाहीत
+Chat	चॅट
+New message	नवीन संदेश
+New group	नवीन गट
+Select a conversation or start a new one.	संभाषण निवडा किंवा नवीन सुरू करा.
+Conversations	संभाषणे
+Group name	गटाचे नाव
+Members	सदस्य
+Create group	गट तयार करा
+Type a message…	संदेश लिहा…
+Send	पाठवा
+No conversations yet	अजून संभाषणे नाहीत
+Back to plans	योजनांकडे परत
+You are buying	तुम्ही खरेदी करत आहात
+Plan	योजना
+Pay with UPI	UPI ने पैसे भरा
+Scan with any UPI app, or pay to:	कोणत्याही UPI अॅपने स्कॅन करा किंवा येथे पैसे भरा:
+UPI transaction reference	UPI व्यवहार संदर्भ क्रमांक
+I have paid	मी पैसे भरले
+The library will verify your payment and activate the plan.	ग्रंथालय तुमचे पेमेंट तपासून योजना सुरू करेल.
+Pay online	ऑनलाइन पैसे भरा
+Cards, net banking and wallets via the secure payment gateway.	सुरक्षित पेमेंट गेटवेद्वारे कार्ड, नेट बँकिंग आणि वॉलेट.
+Continue to payment	पेमेंटसाठी पुढे जा
+Prefer cash? Pay at the library desk and staff will activate your plan.	रोख हवी आहे? ग्रंथालयाच्या काउंटरवर पैसे भरा, कर्मचारी तुमची योजना सुरू करतील.
+UPI QR code	UPI QR कोड
+Checkout	चेकआउट
+Welcome	स्वागत
+You have a guest account. Ask the library desk to upgrade you to a member for attendance, seats and community features.	तुमचे अतिथी खाते आहे. उपस्थिती, आसने आणि समुदाय सुविधांसाठी सदस्य होण्यासाठी ग्रंथालयाच्या काउंटरवर विचारा.
+Available to you	तुमच्यासाठी उपलब्ध
+Library announcements	ग्रंथालयाच्या घोषणा
+Browse the catalogue to see what we have on our shelves.	आमच्याकडे कोणती पुस्तके आहेत ते पाहण्यासाठी सूची पहा.
+Browse books	पुस्तके पहा
+Welcome back	पुन्हा स्वागत
+No active plan	सक्रिय योजना नाही
+Seat	आसन
+Status	स्थिती
+Subscription	सदस्यता
+Manage	व्यवस्थापन
+View plan	योजना पहा
+You are all set. Renewal opens in the last 7 days.	सर्व तयार आहे. नूतनीकरण शेवटच्या 7 दिवसांत उपलब्ध होईल.
+My seat	माझे आसन
+Not allocated	नेमलेले नाही
+Tap below to get a seat for your plan.	तुमच्या योजनेसाठी आसन मिळवण्यासाठी खाली क्लिक करा.
+Take a subscription to get your seat automatically.	आसन आपोआप मिळवण्यासाठी सदस्यता घ्या.
+Open seats	आसने उघडा
+All features	सर्व सुविधा
+My seat bookings	माझी आसन आरक्षणे
+Book a seat	आसन आरक्षित करा
+Books with me	माझ्याकडील पुस्तके
+Browse	पहा
+View all	सर्व पहा
+Active	सक्रिय
+Checked in	चेक-इन केले
+Not in library	ग्रंथालयात नाही
+Choose a plan	योजना निवडा
+Renew now	आता नूतनीकरण करा
+Dashboard	डॅशबोर्ड
+No upcoming bookings	पुढील आरक्षणे नाहीत
+No books issued	कोणतीही पुस्तके दिलेली नाहीत
+Overview	आढावा
+Approvals	मंजुरी
+Visits — last 7 days	भेटी — गेले 7 दिवस
+Active members	सक्रिय सदस्य
+Pending approval	मंजुरी प्रलंबित
+Visits today	आजच्या भेटी
+Active subscriptions	सक्रिय सदस्यता
+Expiring in 7 days	7 दिवसांत संपणाऱ्या
+Revenue today	आजचे उत्पन्न
+Revenue this month	या महिन्याचे उत्पन्न
+Payments to verify	तपासायची पेमेंट
+Books issued	दिलेली पुस्तके
+Overdue books	मुदत उलटलेली पुस्तके
+Guests today	आजचे पाहुणे
+Open reports	उघड तक्रारी
+Error	त्रुटी
+Back to dashboard	डॅशबोर्डवर परत
+Page not found	पान सापडले नाही
+Access denied	प्रवेश नाकारला
+Something went wrong	काहीतरी चुकले
+The page you are looking for does not exist.	तुम्ही शोधत असलेले पान अस्तित्वात नाही.
+You do not have permission to view this page.	हे पान पाहण्याची तुम्हाला परवानगी नाही.
+Please try again in a moment.	कृपया थोड्या वेळाने पुन्हा प्रयत्न करा.
+Module is turned off	मॉड्यूल बंद आहे
+This module is not enabled for your library. Contact your library admin if you need it.	हे मॉड्यूल तुमच्या ग्रंथालयासाठी चालू नाही. गरज असल्यास ग्रंथालय प्रशासकाशी संपर्क साधा.
+Module unavailable	मॉड्यूल उपलब्ध नाही
+Community feed	समुदाय फीड
+Share updates, tips and photos with fellow members.	इतर सदस्यांसोबत अपडेट्स, टिप्स आणि फोटो शेअर करा.
+Post	पोस्ट
+Pinned	पिन केलेले
+Newer	नवीन
+Older	जुने
+What's on your mind?	तुमच्या मनात काय आहे?
+Post content	पोस्टचा मजकूर
+Attach image	चित्र जोडा
+Remove this post?	ही पोस्ट काढायची?
+Remove	काढा
+Pin / unpin	पिन / अनपिन
+Post image	पोस्टचे चित्र
+Write a comment…	टिप्पणी लिहा…
+Comment	टिप्पणी
+No posts yet — be the first!	अजून पोस्ट नाहीत — पहिले व्हा!
+All questions	सर्व प्रश्न
+Resolved	सुटलेले
+Answers	उत्तरे
+Accepted	स्वीकारलेले
+Accept	स्वीकारा
+Your answer	तुमचे उत्तर
+Post answer	उत्तर पोस्ट करा
+Question	प्रश्न
+Discussion forum	चर्चा मंच
+Ask questions and help others.	प्रश्न विचारा आणि इतरांना मदत करा.
+Ask a question	प्रश्न विचारा
+Categories	वर्ग
+Cat	वर्ग
+Add	जोडा
+General	सामान्य
+Post question	प्रश्न पोस्ट करा
+New category	नवीन वर्ग
+Category name	वर्गाचे नाव
+answer	उत्तर
+answers	उत्तरे
+No questions yet	अजून प्रश्न नाहीत
+Nothing here yet	येथे अजून काही नाही
+English	English
+QR Attendance	QR उपस्थिती
+Check in and out, view history	चेक-इन, चेक-आउट आणि इतिहास
+Subscriptions	सदस्यता
+Plans, renewals and expiry	योजना, नूतनीकरण आणि मुदत
+Payments	पेमेंट
+Cash, UPI, online and receipts	रोख, UPI, ऑनलाइन आणि पावत्या
+Seat Booking	आसन आरक्षण
+Your seat and availability	तुमचे आसन आणि उपलब्धता
+Catalogue, issue and return	सूची, देणे आणि परत घेणे
+Approvals and profiles	मंजुरी आणि प्रोफाइल
+Guests	पाहुणे
+Visitor registration and logs	अभ्यागत नोंदणी आणि नोंदी
+Reports	अहवाल
+Analytics, Excel and PDF	विश्लेषण, Excel आणि PDF
+Moderation	नियंत्रण
+Review reported content	तक्रार केलेला मजकूर तपासा
+Community Feed	समुदाय फीड
+Posts, photos, likes, comments	पोस्ट, फोटो, लाईक, टिप्पण्या
+Discussion Forum	चर्चा मंच
+Ask and answer questions	प्रश्न विचारा आणि उत्तरे द्या
+Private and group messages	खाजगी आणि गट संदेश
+Study Groups	अभ्यास गट
+Groups and shared materials	गट आणि सामायिक साहित्य
+News from your library	तुमच्या ग्रंथालयातील बातम्या
+Turn features on or off	सुविधा चालू किंवा बंद करा
+Library Settings	ग्रंथालय सेटिंग्ज
+Hours, address, details	वेळ, पत्ता, तपशील
+Librarians and access	ग्रंथपाल आणि प्रवेश
+Audit Log	ऑडिट नोंद
+Who did what, and when	कोणी काय आणि केव्हा केले
+My Profile	माझे प्रोफाइल
+Details and password	तपशील आणि पासवर्ड
+Report content	मजकूराची तक्रार करा
+What is wrong with it?	यात काय चुकले आहे?
+Report	तक्रार
+Language	भाषा
+Smart Library	स्मार्ट ग्रंथालय
+Platform	प्लॅटफॉर्म
+Community	समुदाय
+Management	व्यवस्थापन
+Page	पान
+User	वापरकर्ता
+Profile	प्रोफाइल
+Sign out	बाहेर पडा
+· Smart Library Platform	· स्मार्ट ग्रंथालय प्लॅटफॉर्म
+© 2026 Smart Library. All rights reserved.	© 2026 स्मार्ट ग्रंथालय. सर्व हक्क राखीव.
+Home	मुख्यपृष्ठ
+Libraries	ग्रंथालये
+Audit	ऑडिट
+Seats	आसने
+Plans	योजना
+Scan	स्कॅन
+Feed	फीड
+More	अधिक
+Main navigation	मुख्य मार्गदर्शन
+Close	बंद करा
+Open menu	मेनू उघडा
+Notifications	सूचना
+Quick navigation	जलद मार्गदर्शन
+Forum	मंच
+Study groups	अभ्यास गट
+© 2026 Smart Library	© 2026 स्मार्ट ग्रंथालय
+Confirm payment	पेमेंटची खात्री करा
+Purpose	कारण
+Pay now	आता पैसे भरा
+Secure payment	सुरक्षित पेमेंट
+All groups	सर्व गट
+Group	गट
+Group chat	गट चॅट
+Join group	गटात सामील व्हा
+Leave	सोडा
+Shared materials	सामायिक साहित्य
+Share	शेअर करा
+PDF, Office docs, text, zip or images up to 10 MB.	PDF, ऑफिस दस्तऐवज, मजकूर, zip किंवा चित्रे, कमाल 10 MB.
+Owner	मालक
+Leave this group?	हा गट सोडायचा?
+Title (optional)	शीर्षक (ऐच्छिक)
+File	फाइल
+Delete this file?	ही फाइल हटवायची?
+Study group	अभ्यास गट
+No materials shared yet	अजून साहित्य शेअर केलेले नाही
+Join a group to chat and share study materials.	चॅट आणि अभ्यास साहित्य शेअर करण्यासाठी गटात सामील व्हा.
+· by	· द्वारे
+View	पहा
+Create study group	अभ्यास गट तयार करा
+Description	वर्णन
+Create	तयार करा
+Open	उघडा
+No study groups yet	अजून अभ्यास गट नाहीत
+Visitor check-in	अभ्यागत चेक-इन
+Your name *	तुमचे नाव *
+Purpose of visit	भेटीचे कारण
+Whom are you visiting? (optional)	तुम्ही कोणाला भेटायला आला आहात? (ऐच्छिक)
+Reading, enquiry, tour…	वाचन, चौकशी, फेरफटका…
+Guests & visitors	पाहुणे आणि अभ्यागत
+Visitors can self-register by scanning the visitor QR code.	अभ्यागत अभ्यागत QR कोड स्कॅन करून स्वतः नोंदणी करू शकतात.
+Register guest	पाहुण्याची नोंद करा
+Visitor QR	अभ्यागत QR
+Guest	पाहुणा
+Register	नोंदणी
+Visitor registration QR	अभ्यागत नोंदणी QR
+No guests yet	अजून पाहुणे नाहीत
+QR attendance, subscriptions, seat booking, books and a study community — one platform for your library.	QR उपस्थिती, सदस्यता, आसन आरक्षण, पुस्तके आणि अभ्यास समुदाय — तुमच्या ग्रंथालयासाठी एकच प्लॅटफॉर्म.
+Sign in	साइन इन
+Join a library	ग्रंथालयात सामील व्हा
+Everything your library needs	तुमच्या ग्रंथालयाला लागणारे सर्व काही
+Check in and out with a QR code	QR कोडने चेक-इन आणि चेक-आउट
+Monthly plans and renewals	मासिक योजना आणि नूतनीकरण
+Cash, UPI and online with receipts	रोख, UPI आणि ऑनलाइन, पावत्यांसह
+A seat allocated with your plan	तुमच्या योजनेसोबत आसन
+Visitor registration	अभ्यागत नोंदणी
+Posts, photos and comments	पोस्ट, फोटो आणि टिप्पण्या
+Questions and answers	प्रश्न आणि उत्तरे
+Shared study materials	सामायिक अभ्यास साहित्य
+Excel and PDF exports	Excel आणि PDF निर्यात
+Libraries on the platform	प्लॅटफॉर्मवरील ग्रंथालये
+Sign in to Smart Library	स्मार्ट ग्रंथालयात साइन इन करा
+You have been signed out.	तुम्ही बाहेर पडला आहात.
+Too many failed attempts. Try again in 15 minutes.	खूप चुकीचे प्रयत्न. 15 मिनिटांनी पुन्हा प्रयत्न करा.
+Your membership is awaiting approval by the library.	तुमच्या सदस्यत्वाला ग्रंथालयाच्या मंजुरीची प्रतीक्षा आहे.
+This account is not active. Contact your library.	हे खाते सक्रिय नाही. तुमच्या ग्रंथालयाशी संपर्क साधा.
+Incorrect email or password.	ईमेल किंवा पासवर्ड चुकीचा आहे.
+Password	पासवर्ड
+New here?	नवीन आहात?
+Create an account	खाते तयार करा
+Demo accounts	डेमो खाती
+(click to fill)	(भरण्यासाठी क्लिक करा)
+Library Admin	ग्रंथालय प्रशासक
+Super Admin	सुपर प्रशासक
+All members	सर्व सदस्य
+Activate	सक्रिय करा
+Suspend	निलंबित करा
+Period	कालावधी
+No subscriptions	सदस्यता नाहीत
+Recent attendance	अलीकडील उपस्थिती
+Returned	परत केले
+Fine	दंड
+Suspend this account?	हे खाते निलंबित करायचे?
+Approve registrations and manage member accounts.	नोंदण्यांना मंजुरी द्या आणि सदस्य खाती सांभाळा.
+Add member	सदस्य जोडा
+All statuses	सर्व स्थिती
+Filter	गाळणी
+Code	कोड
+Actions	कृती
+Approve	मंजूर करा
+Reject	नाकारा
+The member is approved immediately and receives a temporary password.	सदस्याला लगेच मंजुरी मिळते आणि तात्पुरता पासवर्ड मिळतो.
+Search name, email or member code	नाव, ईमेल किंवा सदस्य कोड शोधा
+No members found	सदस्य सापडले नाहीत
+Moderation queue	नियंत्रण रांग
+Review content reported by members.	सदस्यांनी तक्रार केलेला मजकूर तपासा.
+POST	पोस्ट
+Hide content	मजकूर लपवा
+Dismiss	फेटाळा
+Reason:	कारण:
+Nothing to review — all clear	तपासण्यासारखे काही नाही — सर्व ठीक
+You have not borrowed any books	तुम्ही कोणतीही पुस्तके घेतलेली नाहीत
+Mark all as read	सर्व वाचले म्हणून खूण करा
+You are all caught up	तुम्ही सर्व पाहिले आहे
+My payments	माझी पेमेंट
+Receipts are available once a payment is confirmed.	पेमेंटची खात्री झाल्यावर पावत्या उपलब्ध होतात.
+For	कशासाठी
+Amount	रक्कम
+Receipt	पावती
+No payments yet	अजून पेमेंट नाहीत
+Record cash/UPI, verify member payments and issue receipts.	रोख/UPI नोंदवा, सदस्यांची पेमेंट तपासा आणि पावत्या द्या.
+Record payment	पेमेंट नोंदवा
+CASH	रोख
+Mark paid	भरलेले म्हणून खूण करा
+Subscription plan (optional)	सदस्यता योजना (ऐच्छिक)
+— Other payment —	— इतर पेमेंट —
+Amount (₹)	रक्कम (₹)
+Ignored when a plan is chosen.	योजना निवडल्यास दुर्लक्ष केले जाते.
+UPI reference	UPI संदर्भ
+Purpose (for other payments)	कारण (इतर पेमेंटसाठी)
+Locker fee, late fine, …	लॉकर शुल्क, विलंब दंड, …
+My profile	माझे प्रोफाइल
+Member code	सदस्य कोड
+About me	माझ्याबद्दल
+Save changes	बदल जतन करा
+Change password	पासवर्ड बदला
+Current password	सध्याचा पासवर्ड
+New password	नवीन पासवर्ड
+Confirm new password	नवीन पासवर्डची खात्री करा
+Update password	पासवर्ड अद्यतनित करा
+Create your account	तुमचे खाते तयार करा
+Members are approved by the library before first sign-in.	पहिल्या साइन-इनपूर्वी ग्रंथालय सदस्यांना मंजुरी देते.
+Choose a library…	ग्रंथालय निवडा…
+At least 8 characters.	किमान 8 अक्षरे.
+I'm just visiting — create a limited guest account (no approval needed)	मी फक्त भेट देत आहे — मर्यादित अतिथी खाते तयार करा (मंजुरी लागत नाही)
+Already registered?	आधीच नोंदणी केली आहे?
+Reports & analytics	अहवाल आणि विश्लेषण
+Only modules enabled for your library are included.	फक्त तुमच्या ग्रंथालयासाठी चालू असलेले मॉड्यूल समाविष्ट आहेत.
+From	पासून
+To	पर्यंत
+Apply	लागू करा
+Daily visits	दैनिक भेटी
+Daily revenue (₹)	दैनिक उत्पन्न (₹)
+Export	निर्यात
+Type	प्रकार
+Excel	Excel
+PDF	PDF
+Visits	भेटी
+Unique visitors	वेगळे अभ्यागत
+Revenue	उत्पन्न
+New members	नवीन सदस्य
+Seat booking	आसन आरक्षण
+Manage seats	आसने व्यवस्थापित करा
+Add seats	आसने जोडा
+Label prefix	लेबल उपसर्ग
+Creates A1, A2, … (a count of 1 creates exactly the prefix).	A1, A2, … तयार करते (संख्या 1 असल्यास फक्त उपसर्ग तयार होतो).
+How many	किती
+Zone	विभाग
+All seats	सर्व आसने
+Silent hall	शांत सभागृह
+Click to disable	बंद करण्यासाठी क्लिक करा
+Click to enable	चालू करण्यासाठी क्लिक करा
+disabled	बंद
+No seats yet	अजून आसने नाहीत
+Your seat comes with your subscription. Pick a date and time to see availability.	तुमचे आसन तुमच्या सदस्यतेसोबत मिळते. उपलब्धता पाहण्यासाठी तारीख आणि वेळ निवडा.
+Your seat	तुमचे आसन
+until	पर्यंत
+Allocated automatically with your subscription.	तुमच्या सदस्यतेसोबत आपोआप दिले आहे.
+Your previous seat is kept whenever it is free.	तुमचे आधीचे आसन मोकळे असल्यास तेच ठेवले जाते.
+Seat selection needs an active subscription	आसन निवडण्यासाठी सक्रिय सदस्यता हवी
+Take a plan and a free seat is selected for you automatically.	योजना घ्या, मोकळे आसन आपोआप निवडले जाईल.
+Take a subscription	सदस्यता घ्या
+Your subscription is active	तुमची सदस्यता सक्रिय आहे
+No seat is reserved for you yet. Get one now, or book a time slot below.	अजून तुमच्यासाठी आसन राखीव नाही. आता मिळवा किंवा खाली वेळ आरक्षित करा.
+Get my seat	माझे आसन मिळवा
+Check availability	उपलब्धता तपासा
+Seat map	आसन नकाशा
+Free	मोकळे
+Taken	भरलेले
+Reserved	राखीव
+Yours	तुमचे
+Book selected seat	निवडलेले आसन आरक्षित करा
+Allocate a seat to a member	सदस्याला आसन द्या
+Member (active subscription)	सदस्य (सक्रिय सदस्यता)
+Select member	सदस्य निवडा
+Auto (previous seat, else first free)	आपोआप (आधीचे आसन, नाहीतर पहिले मोकळे)
+Allocate	नेमा
+My bookings	माझी आरक्षणे
+when	केव्हा
+Subscriber seats	सदस्यांची आसने
+None	काहीही नाही
+All upcoming (staff)	सर्व आगामी (कर्मचारी)
+Cancel this booking?	हे आरक्षण रद्द करायचे?
+No seats configured	आसने सेट केलेली नाहीत
+No bookings yet	अजून आरक्षणे नाहीत
+My subscription	माझी सदस्यता
+Current plan	सध्याची योजना
+No active subscription	सक्रिय सदस्यता नाही
+Choose a plan below to start using the library. A seat is allocated to you automatically.	ग्रंथालय वापरण्यासाठी खाली योजना निवडा. तुम्हाला आसन आपोआप मिळेल.
+Your subscription is active, so there is nothing to buy right now. Renewal opens in the last 7 days.	तुमची सदस्यता सक्रिय आहे, त्यामुळे आता काही खरेदी करायची नाही. नूतनीकरण शेवटच्या 7 दिवसांत उघडते.
+Your plan ends soon. Renew now and the new period starts right after it, keeping your seat when it is free.	तुमची योजना लवकरच संपते. आता नूतनीकरण करा, नवीन कालावधी लगेच सुरू होईल आणि आसन मोकळे असल्यास तेच ठेवले जाईल.
+Available plans	उपलब्ध योजना
+Buy	खरेदी करा
+Ask the library desk to activate this plan.	ही योजना सुरू करण्यासाठी ग्रंथालयाच्या काउंटरवर विचारा.
+Already subscribed	आधीच सदस्यता घेतली
+No subscriptions yet	अजून सदस्यता नाहीत
+Take this plan	ही योजना घ्या
+Renew with this plan	या योजनेने नूतनीकरण करा
+No plans available	योजना उपलब्ध नाहीत
+Sell and renew plans, and track expiries.	योजना विका, नूतनीकरण करा आणि मुदती पाहा.
+Sell / renew plan	योजना विका / नूतनीकरण
+New plan	नवीन योजना
+Toggle	बदला
+Expiring within 7 days	7 दिवसांत संपणाऱ्या
+All subscriptions	सर्व सदस्यता
+Start	सुरुवात
+End	शेवट
+Payment	पेमेंट
+If the member already has an active plan, the new one starts when it ends.	सदस्याची योजना आधीच सक्रिय असल्यास नवीन योजना ती संपल्यावर सुरू होते.
+Confirm	खात्री करा
+Duration (days)	कालावधी (दिवस)
+Price (₹)	किंमत (₹)
+Cancel this subscription?	ही सदस्यता रद्द करायची?
+Disable	बंद करा
+Enable	चालू करा
+CANCELLED	रद्द
+No plans yet	अजून योजना नाहीत
+Nothing expiring soon	लवकर संपणारे काही नाही
+Create libraries and their first admin account.	ग्रंथालये आणि त्यांचे पहिले प्रशासक खाते तयार करा.
+New library	नवीन ग्रंथालय
+Slug	स्लग
+Created	तयार केले
+URL slug	URL स्लग
+First library admin	पहिला ग्रंथालय प्रशासक
+Admin name	प्रशासकाचे नाव
+Admin email	प्रशासकाचा ईमेल
+Deactivate	निष्क्रिय करा
+SUSPENDED	निलंबित
+No libraries yet	अजून ग्रंथालये नाहीत
+Demo library "Bhagat Singh Abhyasika". Visitor check-in:	डेमो ग्रंथालय "भगतसिंग अभ्यासिका". अभ्यागत चेक-इन:
+. Disable with SEED_DEMO=false.	. SEED_DEMO=false ने बंद करा.
+Room	खोली
+Monthly	मासिक
+Development gateway: this simulates a successful card payment. Connect a real provider by implementing	डेव्हलपमेंट गेटवे: हे यशस्वी कार्ड पेमेंटचे अनुकरण करते. खरा प्रदाता जोडण्यासाठी हे लागू करा:
+ACTIVE	सक्रिय
+PENDING	प्रलंबित
+PAID	भरलेले
+FAILED	अयशस्वी
+EXPIRED	मुदत संपली
+BOOKED	आरक्षित
+COMPLETED	पूर्ण
+OPEN	उघडे
+RESOLVED	सुटलेले
+REJECTED	नाकारले
+DISABLED	बंद
+GUEST	पाहुणा
+MANUAL	हाताने
+UPI	UPI
+ONLINE	ऑनलाइन
+MEMBER	सदस्य
+LIBRARIAN	ग्रंथपाल
+LIBRARY_ADMIN	ग्रंथालय प्रशासक
+SUPER_ADMIN	सुपर प्रशासक
+HIDDEN	लपवलेले
+DISMISSED	फेटाळले
+COMMENT	टिप्पणी
+ANSWER	उत्तर
+QUESTION	प्रश्न
+member	सदस्य
+librarian	ग्रंथपाल
+library admin	ग्रंथालय प्रशासक
+super admin	सुपर प्रशासक
+guest	पाहुणा
+Check-in/check-out via QR code and manual attendance	QR कोडने चेक-इन/चेक-आउट आणि हाताने उपस्थिती
+Monthly plans, renewals and expiry management	मासिक योजना, नूतनीकरण आणि मुदत व्यवस्थापन
+Cash, UPI and online payments with receipts	रोख, UPI आणि ऑनलाइन पेमेंट, पावत्यांसह
+Seat availability and booking	आसन उपलब्धता आणि आरक्षण
+Book Management	पुस्तक व्यवस्थापन
+Inventory, issue and return	साठा, देणे आणि परत घेणे
+Posts, images, likes and comments	पोस्ट, चित्रे, लाईक आणि टिप्पण्या
+Categories, questions and answers	वर्ग, प्रश्न आणि उत्तरे
+Private messages and group chat	खाजगी संदेश आणि गट चॅट
+Study groups and shared materials	अभ्यास गट आणि सामायिक साहित्य
+Guest Management	पाहुणे व्यवस्थापन
+Analytics and Excel/PDF exports	विश्लेषण आणि Excel/PDF निर्यात
+'To' date must be after 'From' date	'पर्यंत' तारीख 'पासून' तारखेनंतरची असावी
+A seat is already reserved for you	तुमच्यासाठी आसन आधीच राखीव आहे
+Admin email already registered	प्रशासकाचा ईमेल आधीच नोंदलेला आहे
+Admin password must be at least 8 characters	प्रशासकाचा पासवर्ड किमान 8 अक्षरांचा असावा
+Already checked out	आधीच चेक-आउट केले आहे
+Already handled	आधीच हाताळले आहे
+Already returned	आधीच परत केले आहे
+An account with this email already exists	या ईमेलचे खाते आधीच अस्तित्वात आहे
+An active subscription is required to book a seat	आसन आरक्षित करण्यासाठी सक्रिय सदस्यता आवश्यक आहे
+Announcement: 	घोषणा: 
+Answer accepted	उत्तर स्वीकारले
+Answer is empty	उत्तर रिकामे आहे
+Book issued	पुस्तक दिले
+Book overdue	पुस्तकाची मुदत उलटली
+Cannot book a past date	मागील तारखेला आरक्षण करता येत नाही
+Chat is disabled for this library	या ग्रंथालयासाठी चॅट बंद आहे
+Chat is not available for your account	तुमच्या खात्यासाठी चॅट उपलब्ध नाही
+Check-out cannot be before check-in	चेक-आउट चेक-इनच्या आधी असू शकत नाही
+Closing time must be after opening time	बंद होण्याची वेळ उघडण्याच्या वेळेनंतर असावी
+Comment is empty	टिप्पणी रिकामी आहे
+Content reported	मजकुराची तक्रार झाली
+Copies cannot be negative	प्रती ऋण असू शकत नाहीत
+Could not store file	फाइल जतन करता आली नाही
+Count must be between 1 and 200	संख्या 1 ते 200 दरम्यान असावी
+Current password is incorrect	सध्याचा पासवर्ड चुकीचा आहे
+End time must be after start time	शेवटची वेळ सुरुवातीच्या वेळेनंतर असावी
+Enter a valid amount	योग्य रक्कम टाका
+Enter your UPI transaction reference	तुमचा UPI व्यवहार संदर्भ क्रमांक टाका
+Group name is required	गटाचे नाव आवश्यक आहे
+Guest checked in	पाहुण्याने चेक-इन केले
+Invalid fine or loan period	दंड किंवा कर्ज कालावधी चुकीचा आहे
+Invalid plan values	योजनेची मूल्ये चुकीची आहेत
+Invalid staff role	कर्मचारी भूमिका चुकीची आहे
+Invalid status	स्थिती चुकीची आहे
+Join the group to share materials	साहित्य शेअर करण्यासाठी गटात सामील व्हा
+Loan period must be 1-90 days	कर्ज कालावधी 1-90 दिवसांचा असावा
+Maximum range is one year	कमाल कालावधी एक वर्ष आहे
+Membership approved	सदस्यत्व मंजूर
+Message is empty	संदेश रिकामा आहे
+Message is too long	संदेश खूप मोठा आहे
+Name is required	नाव आवश्यक आहे
+New answer	नवीन उत्तर
+New comment	नवीन टिप्पणी
+New like	नवीन लाईक
+New member request	नवीन सदस्य विनंती
+New password must be 8-72 characters	नवीन पासवर्ड 8-72 अक्षरांचा असावा
+No copies available	प्रती उपलब्ध नाहीत
+No file selected	फाइल निवडलेली नाही
+No library context	ग्रंथालय संदर्भ नाही
+No seat available	आसन उपलब्ध नाही
+No seat is free for that period	त्या कालावधीसाठी कोणतेही आसन मोकळे नाही
+No seat is free for your subscription period right now	तुमच्या सदस्यता कालावधीसाठी सध्या कोणतेही आसन मोकळे नाही
+Online payments are made by the member	ऑनलाइन पेमेंट सदस्य स्वतः करतात
+Online payments are not configured for this deployment	या प्रणालीवर ऑनलाइन पेमेंट सेट केलेले नाही
+Only a library admin can change an admin	फक्त ग्रंथालय प्रशासकच प्रशासक बदलू शकतो
+Only image files are allowed	फक्त चित्र फाइल्सना परवानगी आहे
+Only members can book seats	फक्त सदस्यच आसन आरक्षित करू शकतात
+Only members can use QR attendance	फक्त सदस्यच QR उपस्थिती वापरू शकतात
+Owners cannot leave their own group	मालक स्वतःचा गट सोडू शकत नाही
+Password must be at least 8 characters	पासवर्ड किमान 8 अक्षरांचा असावा
+Passwords do not match	पासवर्ड जुळत नाहीत
+Payment already processed	पेमेंट आधीच प्रक्रिया झाले आहे
+Payment failed	पेमेंट अयशस्वी
+Payment received	पेमेंट मिळाले
+Payment rejected	पेमेंट नाकारले
+Please choose a valid library	कृपया योग्य ग्रंथालय निवडा
+Please pay cash at the desk — staff will record it	कृपया काउंटरवर रोख भरा — कर्मचारी नोंद करतील
+Receipt is available after payment is confirmed	पेमेंटची खात्री झाल्यानंतर पावती उपलब्ध होते
+Renewal reminder	नूतनीकरण स्मरणपत्र
+Seat allocated	आसन नेमले
+Seat has upcoming bookings; cancel them first	आसनावर पुढील आरक्षणे आहेत; आधी ती रद्द करा
+Seat is allocated to a subscriber; re-assign them first	आसन सदस्याला नेमले आहे; आधी त्यांना दुसरे आसन द्या
+Select a member	सदस्य निवडा
+Select an active member	सक्रिय सदस्य निवडा
+Slug is empty or already used	स्लग रिकामा आहे किंवा आधीच वापरला आहे
+Subscription active	सदस्यता सक्रिय
+Subscription expired	सदस्यतेची मुदत संपली
+Subscriptions are for members only	सदस्यता फक्त सदस्यांसाठी आहे
+Take a subscription to get a seat	आसन मिळवण्यासाठी सदस्यता घ्या
+That seat is reserved for another member	ते आसन दुसऱ्या सदस्यासाठी राखीव आहे
+That seat was just taken for this slot	ते आसन या वेळेसाठी आताच घेतले गेले
+That time slot has already passed	ती वेळ आधीच निघून गेली आहे
+That user cannot be messaged	त्या वापरकर्त्याला संदेश पाठवता येत नाही
+This book has issue history; set copies to 0 instead of deleting	या पुस्तकाचा देवाणघेवाण इतिहास आहे; हटवण्याऐवजी प्रती 0 करा
+This member has no active subscription	या सदस्याची सक्रिय सदस्यता नाही
+This plan is not active	ही योजना सक्रिय नाही
+This plan is not available	ही योजना उपलब्ध नाही
+Title and details are required	शीर्षक आणि तपशील आवश्यक आहेत
+Title and message are required	शीर्षक आणि संदेश आवश्यक आहेत
+Title is required	शीर्षक आवश्यक आहे
+UPI is not configured for this library	या ग्रंथालयासाठी UPI सेट केलेले नाही
+UPI payment to verify	तपासायचे UPI पेमेंट
+Unknown report	अज्ञात अहवाल
+Unsupported format	असमर्थित स्वरूप
+Write something first	आधी काहीतरी लिहा
+You already have a seat booked in this time slot	या वेळेसाठी तुमचे आसन आधीच आरक्षित आहे
+You cannot change your own status	तुम्ही स्वतःची स्थिती बदलू शकत नाही
+You cannot message yourself	तुम्ही स्वतःला संदेश पाठवू शकत नाही
+Your seat is already reserved for you through your subscription	तुमच्या सदस्यतेमुळे तुमचे आसन आधीच राखीव आहे
+Your subscription is not active. Please renew to check in.	तुमची सदस्यता सक्रिय नाही. चेक-इनसाठी कृपया नूतनीकरण करा.
+Plan created	योजना तयार केली
+Subscription activated	सदस्यता सक्रिय केली
+Subscription cancelled	सदस्यता रद्द केली
+Booking cancelled	आरक्षण रद्द केले
+Settings saved	सेटिंग्ज जतन केल्या
+Profile updated	प्रोफाइल अद्यतनित केले
+Password updated	पासवर्ड अद्यतनित केला
+Announcement published	घोषणा प्रकाशित केली
+Announcement deleted	घोषणा हटवली
+Book added	पुस्तक जोडले
+Book returned	पुस्तक परत घेतले
+Book deleted	पुस्तक हटवले
+Account created	खाते तयार केले
+Library created	ग्रंथालय तयार केले
+Posted	पोस्ट केले
+Comment added	टिप्पणी जोडली
+Answer posted	उत्तर पोस्ट केले
+Question posted	प्रश्न पोस्ट केला
+Category added	वर्ग जोडला
+Group created	गट तयार केला
+Joined the group	गटात सामील झालात
+You left the group	तुम्ही गट सोडला
+File shared	फाइल शेअर केली
+File deleted	फाइल हटवली
+Payment recorded	पेमेंट नोंदवले
+Payment verified	पेमेंट तपासले
+Registered. You can sign in once the library approves your account.	नोंदणी झाली. ग्रंथालयाने मंजुरी दिल्यावर तुम्ही साइन इन करू शकता.
+Account created. You can sign in now.	खाते तयार झाले. आता साइन इन करू शकता.
+Checked out	चेक-आउट केले
+Thank you — you are checked in	धन्यवाद — तुम्ही चेक-इन केले आहे
+Visit recorded	भेट नोंदवली
+Jan	जाने
+Feb	फेब्रु
+Mar	मार्च
+Apr	एप्रिल
+May	मे
+Jun	जून
+Jul	जुलै
+Aug	ऑगस्ट
+Sep	सप्टें
+Oct	ऑक्टो
+Nov	नोव्हें
+Dec	डिसें
+Announcement published and members notified	घोषणा प्रकाशित केली आणि सदस्यांना कळवले
+Book saved	पुस्तक जतन केले
+Guest registered	पाहुण्याची नोंद झाली
+Library created with its admin account	ग्रंथालय आणि त्याचे प्रशासक खाते तयार केले
+Material deleted	साहित्य हटवले
+Material shared	साहित्य शेअर केले
+Member checked in	सदस्याने चेक-इन केले
+Member checked out	सदस्याने चेक-आउट केले
+Password changed	पासवर्ड बदलला
+Post removed	पोस्ट काढली
+QR code regenerated. Print and replace the old one at the entrance.	QR कोड पुन्हा तयार केला. तो छापून प्रवेशद्वारावरील जुन्या कोडच्या जागी लावा.
+Returned	परत केले
+Staff account created	कर्मचारी खाते तयार केले
+Thank you, you're checked in. Enjoy your visit!	धन्यवाद, तुम्ही चेक-इन केले आहे. तुमची भेट आनंददायी ठरो!
+Thanks — the library team will review this.	धन्यवाद — ग्रंथालय कर्मचारी हे तपासतील.
+UPI payment submitted. The library will verify it shortly.	UPI पेमेंट सादर केले. ग्रंथालय ते लवकरच तपासेल.
+Library activated	ग्रंथालय सक्रिय केले
+Library deactivated	ग्रंथालय निष्क्रिय केले
+Member approved	सदस्य मंजूर
+Request rejected	विनंती नाकारली
+Content hidden	मजकूर लपवला
+Report dismissed	तक्रार फेटाळली
+Checked in. Happy studying!	चेक-इन झाले. अभ्यासासाठी शुभेच्छा!
+Seat reserved for you	तुमच्यासाठी आसन राखीव
+Time in library today	आज ग्रंथालयात घालवलेला वेळ
+Time in library this month	या महिन्यात ग्रंथालयात घालवलेला वेळ
+Days attended this month	या महिन्यातील उपस्थित दिवस
+Average per day attended	उपस्थित दिवसाची सरासरी
+Hours in library — this month	ग्रंथालयातील तास — या महिन्यात
+Member time today	सदस्यांचा आजचा वेळ
+Member time this month	सदस्यांचा या महिन्याचा वेळ
+Hours	तास
+Time cannot be in the future	वेळ भविष्यातील असू शकत नाही
+You are sending messages too fast	तुम्ही खूप जलद संदेश पाठवत आहात
+Reference is too long	संदर्भ खूप मोठा आहे
+Bhagat Singh Abhyasika	भगतसिंग अभ्यासिका
+Nandurga, Tq. Ausa, Dist. Latur	नांदुर्गा, ता. औसा, जि. लातूर
+An inspiring study library for quality studies	गुणवत्तापूर्ण अभ्यासासाठी एक प्रेरणादायी अभ्यासिका...!
+Calm and study-friendly environment	शांत व अभ्यासपूरक वातावरण
+Free Wi-Fi facility	मोफत Wi-Fi सुविधा
+Reference books for reading	वाचनासाठी संदर्भ ग्रंथ
+Useful for competitive exam preparation	स्पर्धा परीक्षेची तयारी करण्यासाठी उपयुक्त
+Study facility during fixed hours	नियत वेळेत अभ्यासाची सुविधा
+Tagline	घोषवाक्य
+Facilities (one per line)	सुविधा (प्रत्येक ओळीत एक)

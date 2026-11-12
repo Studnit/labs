@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Subscriptions', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Subscriptions</h2><p class="page-sub">Sell and renew plans, and track expiries.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#assign"><i class="bi bi-plus-lg me-1"></i>Sell / renew plan</button>
+</div>
+<div class="row g-3 mb-3">
+  <div class="col-lg-5"><div class="card h-100"><div class="card-header d-flex justify-content-between"><span>Plans</span>
+    <button class="btn btn-sm btn-outline-primary" sec:authorize="hasRole('LIBRARY_ADMIN')" data-bs-toggle="modal" data-bs-target="#newPlan">New plan</button></div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between align-items-center" th:each="p : ${plans}">
+        <div><div class="fw-semibold" th:text="${p.name}">Monthly</div><div class="small text-muted" th:text="${p.durationDays} + ' days · ₹' + ${p.price}">30 days</div></div>
+        <div class="d-flex align-items-center gap-2"><span th:replace="~{fragments/components :: badge((${p.active} ? 'ACTIVE' : 'CANCELLED'))}"></span>
+          <form th:action="@{/subscriptions/plans/{id}/toggle(id=${p.id})}" method="post" sec:authorize="hasRole('LIBRARY_ADMIN')"><button class="btn btn-sm btn-light" th:text="${p.active} ? 'Disable' : 'Enable'">Toggle</button></form></div></li>
+      <li class="list-group-item" th:if="${plans.isEmpty()}"><div th:replace="~{fragments/components :: empty('No plans yet','bi-card-checklist')}"></div></li>
+    </ul></div></div>
+  <div class="col-lg-7"><div class="card h-100"><div class="card-header d-flex justify-content-between"><span>Expiring within 7 days</span><span class="badge text-bg-warning" th:text="${expiring.size()}">0</span></div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between" th:each="s : ${expiring}"><span th:text="${s.member.fullName}">Name</span>
+        <span class="text-muted" th:text="${s.endDate} + ' (' + ${s.daysLeft()} + ' d)'">date</span></li>
+      <li class="list-group-item" th:if="${expiring.isEmpty()}"><div th:replace="~{fragments/components :: empty('Nothing expiring soon','bi-check2-circle')}"></div></li>
+    </ul></div></div>
+</div>
+<div class="card"><div class="card-header">All subscriptions</div><div class="table-responsive"><table class="table table-hover mb-0">
+  <thead><tr><th>Member</th><th>Plan</th><th>Start</th><th>End</th><th>Status</th><th></th></tr></thead><tbody>
+  <tr th:each="s : ${subscriptions}"><td th:text="${s.member.fullName}">m</td><td th:text="${s.plan != null} ? ${s.plan.name} : '-'">p</td><td th:text="${s.startDate}">s</td><td th:text="${s.endDate}">e</td>
+    <td><span th:replace="~{fragments/components :: badge(${s.status})}"></span></td>
+    <td class="text-end"><form th:if="${s.status.name() == 'ACTIVE'}" th:action="@{/subscriptions/{id}/cancel(id=${s.id})}" method="post" data-confirm="Cancel this subscription?"><button class="btn btn-sm btn-outline-danger">Cancel</button></form></td></tr>
+  <tr th:if="${subscriptions.isEmpty()}"><td colspan="6"><div th:replace="~{fragments/components :: empty('No subscriptions yet','bi-card-checklist')}"></div></td></tr></tbody></table></div></div>
+
+<div class="modal fade" id="assign" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/subscriptions/assign}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Sell / renew plan</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label" for="as-m">Member</label><select id="as-m" name="memberId" class="form-select" required><option value="">Choose…</option><option th:each="m : ${members}" th:value="${m.id}" th:text="${m.fullName}">m</option></select></div>
+    <div class="mb-3"><label class="form-label" for="as-p">Plan</label><select id="as-p" name="planId" class="form-select" required><option value="">Choose…</option><option th:each="p : ${plans}" th:if="${p.active}" th:value="${p.id}" th:text="${p.name} + ' — ₹' + ${p.price}">p</option></select></div>
+    <div class="row g-3" th:if="${@features.on('PAYMENTS')}">
+      <div class="col-6"><label class="form-label" for="as-method">Payment</label><select id="as-method" name="method" class="form-select"><option th:each="m : ${methods}" th:value="${m}" th:text="${m}">CASH</option></select></div>
+      <div class="col-6"><label class="form-label" for="as-ref">UPI reference</label><input id="as-ref" name="reference" class="form-control" maxlength="100"></div></div>
+    <div class="form-text">If the member already has an active plan, the new one starts when it ends.</div>
+  </div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Confirm</button></div></form></div></div>
+<div class="modal fade" id="newPlan" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/subscriptions/plans}" method="post">
+  <div class="modal-header"><h5 class="modal-title">New plan</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="mb-3"><label class="form-label" for="np-n">Name</label><input id="np-n" name="name" class="form-control" required maxlength="80"></div>
+    <div class="row g-3"><div class="col-6"><label class="form-label" for="np-d">Duration (days)</label><input id="np-d" name="durationDays" type="number" min="1" value="30" class="form-control" required></div>
+    <div class="col-6"><label class="form-label" for="np-p">Price (₹)</label><input id="np-p" name="price" type="number" min="0" step="0.01" class="form-control" required></div></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Create</button></div></form></div></div>
+</section>
+</body>
+</html>

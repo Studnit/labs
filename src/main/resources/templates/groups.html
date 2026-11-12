@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Study groups', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Study groups</h2><p class="page-sub">Join a group to chat and share study materials.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGroup"><i class="bi bi-plus-lg me-1"></i>Create group</button>
+</div>
+<div class="row g-3">
+  <div class="col-md-6 col-xl-4" th:each="g : ${groups}"><div class="card h-100"><div class="card-body d-flex flex-column">
+    <h3 class="h6" th:text="${g.name}">Group</h3><p class="text-muted small flex-grow-1" th:text="${g.description}">desc</p>
+    <div class="d-flex justify-content-between align-items-center"><span class="small text-muted"><i class="bi bi-people"></i> <span th:text="${counts[g.id]}">0</span> · by <span th:text="${g.owner.fullName}">o</span></span>
+      <a class="btn btn-sm" th:classappend="${mine.contains(g.id)} ? 'btn-primary' : 'btn-outline-primary'" th:href="@{/groups/{id}(id=${g.id})}" th:text="${mine.contains(g.id)} ? 'Open' : 'View'">View</a></div></div></div></div>
+  <div class="col-12" th:if="${groups.isEmpty()}"><div class="card"><div th:replace="~{fragments/components :: empty('No study groups yet','bi-people')}"></div></div></div>
+</div>
+<div class="modal fade" id="newGroup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/groups}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Create study group</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="mb-3"><label class="form-label" for="sg-n">Name</label><input id="sg-n" name="name" class="form-control" required maxlength="100"></div>
+    <div><label class="form-label" for="sg-d">Description</label><textarea id="sg-d" name="description" class="form-control" rows="3" maxlength="1000"></textarea></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Create</button></div></form></div></div>
+</section>
+</body>
+</html>

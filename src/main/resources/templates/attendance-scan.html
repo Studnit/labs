@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Check in / out', ~{::section})}">
+<body>
+<section>
+<div class="card mx-auto" style="max-width:460px"><div class="card-body text-center p-4">
+  <div class="avatar mx-auto mb-3" style="width:64px;height:64px;font-size:1.8rem"><i class="bi bi-qr-code-scan"></i></div>
+  <h2 class="h5" th:text="${lib.name}">Library</h2>
+  <p class="text-muted" th:text="${open != null} ? 'You are checked in since ' + ${#temporals.format(open.checkIn,'HH:mm')} : 'You are not checked in.'">status</p>
+  <form th:action="@{/attendance/scan/{t}(t=${token})}" method="post" sec:authorize="hasRole('MEMBER')">
+    <button class="btn btn-lg w-100" th:classappend="${open != null} ? 'btn-danger' : 'btn-success'" th:text="${open != null} ? 'Check out' : 'Check in'">Go</button>
+  </form>
+  <div class="alert alert-info mb-0" sec:authorize="!hasRole('MEMBER')">Only members can check in with the QR code.</div>
+</div></div>
+</section>
+</body>
+</html>

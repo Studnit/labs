@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Libraries', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Libraries</h2><p class="page-sub">Create libraries and their first admin account.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newLib"><i class="bi bi-plus-lg me-1"></i>New library</button></div>
+<div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
+  <thead><tr><th>Library</th><th>Slug</th><th>Created</th><th>Status</th><th></th></tr></thead><tbody>
+  <tr th:each="l : ${libraries}"><td class="fw-semibold" th:text="${l.name}">n</td><td><code th:text="${l.slug}">s</code></td><td th:text="${#temporals.format(l.createdAt,'dd MMM yyyy')}">d</td>
+    <td><span th:replace="~{fragments/components :: badge((${l.active} ? 'ACTIVE' : 'SUSPENDED'))}"></span></td>
+    <td class="text-end"><form th:action="@{/super/libraries/{id}/active(id=${l.id})}" method="post"><input type="hidden" name="active" th:value="${!l.active}">
+      <button class="btn btn-sm" th:classappend="${l.active} ? 'btn-outline-danger' : 'btn-outline-success'" th:text="${l.active} ? 'Deactivate' : 'Activate'">Toggle</button></form></td></tr>
+  <tr th:if="${libraries.isEmpty()}"><td colspan="5"><div th:replace="~{fragments/components :: empty('No libraries yet','bi-buildings')}"></div></td></tr></tbody></table></div></div>
+<div class="modal fade" id="newLib" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/super/libraries}" method="post">
+  <div class="modal-header"><h5 class="modal-title">New library</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="row g-3">
+    <div class="col-md-7"><label class="form-label" for="l-n">Library name</label><input id="l-n" name="name" class="form-control" required maxlength="120"></div>
+    <div class="col-md-5"><label class="form-label" for="l-s">URL slug</label><input id="l-s" name="slug" class="form-control" required maxlength="40" pattern="[a-z0-9-]+" placeholder="city-central"></div>
+    <div class="col-12"><hr class="my-1"><div class="small text-muted">First library admin</div></div>
+    <div class="col-md-6"><label class="form-label" for="l-an">Admin name</label><input id="l-an" name="adminName" class="form-control" required maxlength="100"></div>
+    <div class="col-md-6"><label class="form-label" for="l-ae">Admin email</label><input id="l-ae" name="adminEmail" type="email" class="form-control" required></div>
+    <div class="col-12"><label class="form-label" for="l-ap">Temporary password</label><input id="l-ap" name="adminPassword" type="password" class="form-control" minlength="8" maxlength="72" autocomplete="new-password" required></div>
+  </div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Create</button></div></form></div></div>
+</section>
+</body>
+</html>

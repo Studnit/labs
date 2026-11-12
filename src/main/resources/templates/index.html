@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/public :: shell('Welcome', ~{::section})}">
+<body>
+<section>
+<div class="auth-wrap">
+  <div class="container" style="max-width:980px">
+    <div class="hero text-center mb-4">
+      <div class="mb-3 fs-1"><i class="bi bi-book-half"></i></div>
+      <h1 class="fw-bold">Smart Library</h1>
+      <p class="lead mb-4 mx-auto" style="max-width:620px">QR attendance, subscriptions, seat booking, books and a study community — one platform for your library.</p>
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <a class="btn btn-light btn-lg" th:href="@{/login}"><i class="bi bi-box-arrow-in-right me-1"></i>Sign in</a>
+        <a class="btn btn-outline-light btn-lg" th:href="@{/register}">Join a library</a>
+      </div>
+    </div>
+    <h2 class="h5 fw-bold text-center mb-3">Everything your library needs</h2>
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-attendance"><i class="bi bi-qr-code-scan"></i><b>QR Attendance</b><small>Check in and out with a QR code</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-subscriptions"><i class="bi bi-card-checklist"></i><b>Subscriptions</b><small>Monthly plans and renewals</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-payments"><i class="bi bi-cash-coin"></i><b>Payments</b><small>Cash, UPI and online with receipts</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-seats"><i class="bi bi-grid-3x3-gap"></i><b>Seat Booking</b><small>A seat allocated with your plan</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-books"><i class="bi bi-book"></i><b>Books</b><small>Catalogue, issue and return</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-guests"><i class="bi bi-person-badge"></i><b>Guests</b><small>Visitor registration</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-feed"><i class="bi bi-chat-square-heart"></i><b>Community Feed</b><small>Posts, photos and comments</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-forum"><i class="bi bi-question-circle"></i><b>Discussion Forum</b><small>Questions and answers</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-chat"><i class="bi bi-chat-dots"></i><b>Chat</b><small>Private and group messages</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-groups"><i class="bi bi-people"></i><b>Study Groups</b><small>Shared study materials</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-reports"><i class="bi bi-graph-up"></i><b>Reports</b><small>Excel and PDF exports</small></div></div>
+      <div class="col-6 col-md-4 col-lg-3"><div class="ftile ft-announcements"><i class="bi bi-megaphone"></i><b>Announcements</b><small>News from your library</small></div></div>
+    </div>
+    <div class="card" th:if="${!libraries.isEmpty()}">
+      <div class="card-header">Libraries on the platform</div>
+      <div class="list-group list-group-flush">
+        <div class="list-group-item" th:each="l : ${libraries}">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <div><strong class="fs-5" th:text="${l.name}">Library</strong>
+              <div class="small text-muted"><i class="bi bi-geo-alt-fill text-danger me-1"></i><span th:text="${l.address}">Address</span></div>
+              <div class="small fw-semibold text-primary mt-1" th:if="${l.tagline != null}" th:text="${l.tagline}">Tagline</div></div>
+            <div class="d-flex gap-2">
+              <a class="btn btn-sm btn-outline-primary" th:href="@{/register(library=${l.slug})}">Register</a>
+              <a class="btn btn-sm btn-light" th:href="@{/g/{s}(s=${l.slug})}">Visitor check-in</a>
+            </div>
+          </div>
+          <div class="d-flex flex-wrap gap-2 mt-2" th:if="${!l.facilityList().isEmpty()}">
+            <span class="pill solid border" th:each="f : ${l.facilityList()}"><i class="bi bi-check-circle-fill text-success"></i><span th:text="${f}">Facility</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+</body>
+</html>

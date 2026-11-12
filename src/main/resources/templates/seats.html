@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Seats', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Seats</h2><p class="page-sub">Your seat comes with your subscription. Pick a date and time to see availability.</p></div>
+  <a class="btn btn-outline-primary" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')" th:href="@{/seats/manage}"><i class="bi bi-gear me-1"></i>Manage seats</a>
+</div>
+
+<!-- Member status banner -->
+<th:block sec:authorize="hasRole('MEMBER')">
+  <div class="seat-hero mb-3" th:if="${allocation != null}">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <div><div class="small opacity-75">Your seat</div><div class="big" th:text="${allocation.seat.label}">A1</div>
+        <div class="small" th:text="'Reserved for you until ' + ${#temporals.format(allocation.endDate,'dd MMM yyyy')}">until</div></div>
+      <div class="text-end small opacity-90"><i class="bi bi-magic me-1"></i>Allocated automatically with your subscription.<br>Your previous seat is kept whenever it is free.</div>
+    </div>
+  </div>
+  <div class="notice-lock p-3 mb-3" th:if="${allocation == null and !hasSubscription}">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div><div class="fw-bold"><i class="bi bi-lock-fill text-warning me-1"></i>Seat selection needs an active subscription</div>
+        <div class="small text-muted">Take a plan and a free seat is selected for you automatically.</div></div>
+      <a class="btn btn-primary" th:href="@{/subscriptions}">Take a subscription</a>
+    </div>
+  </div>
+  <div class="card mb-3 border-primary-subtle" th:if="${allocation == null and hasSubscription and subscriptionsOn}">
+    <div class="card-body d-flex flex-wrap justify-content-between align-items-center gap-2">
+      <div><div class="fw-bold"><i class="bi bi-check-circle-fill text-success me-1"></i>Your subscription is active</div>
+        <div class="small text-muted">No seat is reserved for you yet. Get one now, or book a time slot below.</div></div>
+      <form th:action="@{/seats/allocate-me}" method="post"><button class="btn btn-primary"><i class="bi bi-magic me-1"></i>Get my seat</button></form>
+    </div>
+  </div>
+</th:block>
+
+<div class="card mb-3"><div class="card-body"><form class="row g-2 align-items-end" method="get" th:action="@{/seats}">
+  <div class="col-6 col-md-3"><label class="form-label" for="f-date">Date</label><input id="f-date" type="date" name="date" th:value="${date}" class="form-control"></div>
+  <div class="col-3 col-md-2"><label class="form-label" for="f-start">From</label><input id="f-start" type="time" name="start" th:value="${start}" class="form-control"></div>
+  <div class="col-3 col-md-2"><label class="form-label" for="f-end">To</label><input id="f-end" type="time" name="end" th:value="${end}" class="form-control"></div>
+  <div class="col-12 col-md-2 d-grid"><button class="btn btn-outline-primary">Check availability</button></div></form></div></div>
+<div class="row g-3">
+  <div class="col-lg-8"><div class="card"><div class="card-header d-flex flex-wrap justify-content-between gap-2"><span>Seat map</span>
+    <span class="small text-muted"><span class="legend-dot" style="background:#86efac"></span>Free <span class="legend-dot ms-2" style="background:#fca5a5"></span>Taken <span class="legend-dot ms-2" style="background:#fcd34d"></span>Reserved <span class="legend-dot ms-2" style="background:#ec4899"></span>Yours</span></div>
+    <form class="card-body" th:action="@{/seats/book}" method="post">
+      <input type="hidden" name="date" th:value="${date}"><input type="hidden" name="start" th:value="${start}"><input type="hidden" name="end" th:value="${end}">
+      <div class="seat-grid" role="radiogroup" aria-label="Seats">
+        <div class="seat" th:each="s : ${seats}"
+             th:classappend="${s.mine()} ? 'mine' : (${s.reserved()} ? 'reserved' : (${!s.free()} ? 'taken' : (${locked} ? 'locked' : '')))">
+          <input type="radio" name="seatId" th:id="'seat-' + ${s.seat().id}" th:value="${s.seat().id}"
+                 th:checked="${s.mine()}" th:disabled="${!s.free() or locked}">
+          <label th:for="'seat-' + ${s.seat().id}"><i class="bi" th:classappend="${s.mine()} ? 'bi-person-check-fill' : (${s.reserved()} ? 'bi-lock-fill' : (${!s.free()} ? 'bi-x-circle' : 'bi-check2-circle'))"></i><span th:text="${s.seat().label}">A1</span><small th:text="${s.mine()} ? 'Your seat' : (${s.free()} ? ${s.seat().zone} : ${s.bookedBy()})">zone</small></label></div>
+      </div>
+      <th:block th:if="${seats.isEmpty()}"><div th:replace="~{fragments/components :: empty('No seats configured','bi-grid-3x3-gap')}"></div></th:block>
+      <button class="btn btn-primary mt-3" sec:authorize="hasRole('MEMBER')" th:unless="${seats.isEmpty() or locked}"><i class="bi bi-check2-circle me-1"></i>Book selected seat</button>
+    </form></div>
+
+    <div class="card mt-3" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')" th:if="${@features.on('SUBSCRIPTIONS')}">
+      <div class="card-header">Allocate a seat to a member</div>
+      <form class="card-body row g-2 align-items-end" th:action="@{/seats/allocate}" method="post">
+        <div class="col-md-5"><label class="form-label" for="al-member">Member (active subscription)</label>
+          <select id="al-member" name="memberId" class="form-select" required><option value="">Select member</option><option th:each="u : ${members}" th:value="${u.id}" th:text="${u.fullName}">Member</option></select></div>
+        <div class="col-md-4"><label class="form-label" for="al-seat">Seat</label>
+          <select id="al-seat" name="seatId" class="form-select"><option value="">Auto (previous seat, else first free)</option><option th:each="st : ${allSeats}" th:if="${st.active}" th:value="${st.id}" th:text="${st.label}">A1</option></select></div>
+        <div class="col-md-3 d-grid"><button class="btn btn-primary">Allocate</button></div>
+      </form></div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card" sec:authorize="hasRole('MEMBER')"><div class="card-header">My bookings</div><ul class="list-group list-group-flush">
+      <li class="list-group-item d-flex justify-content-between align-items-center gap-2" th:each="b : ${myBookings}">
+        <div><strong th:text="${b.seat.label}">A1</strong> <span class="text-muted" th:text="${#temporals.format(b.bookingDate,'dd MMM')} + ' ' + ${b.startTime} + '–' + ${b.endTime}">when</span><div><span th:replace="~{fragments/components :: badge(${b.status})}"></span></div></div>
+        <form th:if="${b.status.name() == 'BOOKED'}" th:action="@{/seats/bookings/{id}/cancel(id=${b.id})}" method="post" data-confirm="Cancel this booking?"><button class="btn btn-sm btn-outline-danger">Cancel</button></form></li>
+      <li class="list-group-item" th:if="${myBookings.isEmpty()}"><div th:replace="~{fragments/components :: empty('No bookings yet','bi-calendar-check')}"></div></li></ul></div>
+    <div class="card" th:if="${allocations != null}"><div class="card-header">Subscriber seats</div><ul class="list-group list-group-flush" style="max-height:320px;overflow:auto">
+      <li class="list-group-item small d-flex justify-content-between" th:each="a : ${allocations}"><span><strong th:text="${a.seat.label}">A1</strong> · <span th:text="${a.member.fullName}">m</span></span><span class="text-muted" th:text="'until ' + ${#temporals.format(a.endDate,'dd MMM')}">until</span></li>
+      <li class="list-group-item text-muted text-center" th:if="${allocations.isEmpty()}">None</li></ul></div>
+    <div class="card mt-3" th:if="${upcoming != null}"><div class="card-header">All upcoming (staff)</div><ul class="list-group list-group-flush" style="max-height:320px;overflow:auto">
+      <li class="list-group-item small d-flex justify-content-between" th:each="b : ${upcoming}"><span><strong th:text="${b.seat.label}">A1</strong> · <span th:text="${b.member.fullName}">m</span></span><span class="text-muted" th:text="${#temporals.format(b.bookingDate,'dd MMM')} + ' ' + ${b.startTime}">when</span></li>
+      <li class="list-group-item text-muted text-center" th:if="${upcoming.isEmpty()}">None</li></ul></div></div>
+</div>
+</section>
+</body>
+</html>

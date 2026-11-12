@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Issue TITLE return', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><a th:href="@{/books}" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> Catalogue</a><h2 class="page-title mt-1">Issue &amp; return</h2></div>
+<div class="card mb-3"><div class="card-header">Issue a book</div><div class="card-body"><form class="row g-2 align-items-end" th:action="@{/books/issue}" method="post">
+  <div class="col-md-5"><label class="form-label" for="i-book">Book</label><select id="i-book" name="bookId" class="form-select" required><option value="">Choose…</option>
+    <option th:each="b : ${books}" th:value="${b.id}" th:disabled="${b.availableCopies lt 1}" th:text="${b.title} + ' (' + ${b.availableCopies} + ' available)'">b</option></select></div>
+  <div class="col-md-4"><label class="form-label" for="i-member">Member</label><select id="i-member" name="memberId" class="form-select" required><option value="">Choose…</option>
+    <option th:each="m : ${members}" th:value="${m.id}" th:text="${m.fullName}">m</option></select></div>
+  <div class="col-6 col-md-1"><label class="form-label" for="i-days">Days</label><input id="i-days" name="days" type="number" min="1" max="90" class="form-control" placeholder="14"></div>
+  <div class="col-6 col-md-2 d-grid"><button class="btn btn-primary">Issue</button></div></form></div></div>
+<div class="card"><div class="card-header">Currently issued</div><div class="table-responsive"><table class="table mb-0">
+  <thead><tr><th>Book</th><th>Member</th><th>Issued</th><th>Due</th><th></th></tr></thead><tbody>
+  <tr th:each="i : ${issues}"><td th:text="${i.book.title}">b</td><td th:text="${i.member.fullName}">m</td><td th:text="${i.issuedAt}">d</td>
+    <td><span th:text="${i.dueDate}" th:classappend="${i.overdue} ? 'text-danger fw-semibold'">due</span> <span class="badge text-bg-danger" th:if="${i.overdue}">Overdue</span></td>
+    <td class="text-end"><form th:action="@{/books/issues/{id}/return(id=${i.id})}" method="post"><button class="btn btn-sm btn-outline-success">Return</button></form></td></tr>
+  <tr th:if="${issues.isEmpty()}"><td colspan="5"><div th:replace="~{fragments/components :: empty('No books are out','bi-book')}"></div></td></tr></tbody></table></div></div>
+</section>
+</body>
+</html>

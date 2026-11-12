@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Profile', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">My profile</h2></div>
+<div class="row g-3">
+  <div class="col-lg-7"><div class="card"><div class="card-header">Details</div><div class="card-body">
+    <form th:action="@{/profile}" method="post">
+      <div class="row g-3">
+        <div class="col-md-6"><label class="form-label" for="fullName">Full name</label><input id="fullName" name="fullName" class="form-control" th:value="${profile.fullName}" maxlength="100" required></div>
+        <div class="col-md-6"><label class="form-label" for="phone">Phone</label><input id="phone" name="phone" class="form-control" th:value="${profile.phone}" maxlength="20"></div>
+        <div class="col-md-6"><label class="form-label">Email</label><input class="form-control" th:value="${profile.email}" disabled></div>
+        <div class="col-md-6"><label class="form-label">Member code</label><input class="form-control" th:value="${profile.memberCode}" disabled></div>
+        <div class="col-12"><label class="form-label" for="address">Address</label><input id="address" name="address" class="form-control" th:value="${profile.address}" maxlength="255"></div>
+        <div class="col-12"><label class="form-label" for="bio">About me</label><textarea id="bio" name="bio" class="form-control" rows="3" maxlength="500" th:text="${profile.bio}"></textarea></div>
+      </div>
+      <button class="btn btn-primary mt-3">Save changes</button>
+    </form></div></div></div>
+  <div class="col-lg-5"><div class="card"><div class="card-header">Change password</div><div class="card-body">
+    <form th:action="@{/profile/password}" method="post">
+      <div class="mb-3"><label class="form-label" for="current">Current password</label><input id="current" name="current" type="password" class="form-control" autocomplete="current-password" required></div>
+      <div class="mb-3"><label class="form-label" for="next">New password</label><input id="next" name="next" type="password" class="form-control" minlength="8" maxlength="72" autocomplete="new-password" required></div>
+      <div class="mb-3"><label class="form-label" for="confirm">Confirm new password</label><input id="confirm" name="confirm" type="password" class="form-control" autocomplete="new-password" required></div>
+      <button class="btn btn-outline-primary">Update password</button>
+    </form></div></div></div>
+</div>
+</section>
+</body>
+</html>

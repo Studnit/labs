@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Guests', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Guests &amp; visitors</h2><p class="page-sub">Visitors can self-register by scanning the visitor QR code.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGuest"><i class="bi bi-person-plus me-1"></i>Register guest</button>
+</div>
+<div class="row g-3">
+  <div class="col-lg-3"><div class="card"><div class="card-body text-center qr-box"><div class="fw-semibold mb-2">Visitor QR</div><img th:src="@{/guests/qr.png}" alt="Visitor registration QR"><div class="small text-muted text-break mt-2" th:text="${registrationUrl}">url</div></div></div></div>
+  <div class="col-lg-9"><div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
+    <thead><tr><th>Guest</th><th class="d-none d-md-table-cell">Purpose</th><th>In</th><th>Out</th><th></th></tr></thead><tbody>
+    <tr th:each="g : ${guests}"><td><div class="fw-semibold" th:text="${g.name}">n</div><div class="small text-muted" th:text="${g.phone}">p</div></td>
+      <td class="d-none d-md-table-cell" th:text="${g.purpose}">p</td><td class="text-nowrap" th:text="${#temporals.format(g.checkIn,'dd MMM HH:mm')}">in</td>
+      <td th:text="${g.checkOut != null} ? ${#temporals.format(g.checkOut,'HH:mm')} : '—'">out</td>
+      <td class="text-end"><form th:if="${g.checkOut == null}" th:action="@{/guests/{id}/checkout(id=${g.id})}" method="post"><button class="btn btn-sm btn-outline-danger">Check out</button></form></td></tr>
+    <tr th:if="${guests.isEmpty()}"><td colspan="5"><div th:replace="~{fragments/components :: empty('No guests yet','bi-person-badge')}"></div></td></tr></tbody></table></div></div></div>
+</div>
+<div class="modal fade" id="newGuest" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/guests}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Register guest</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="mb-3"><label class="form-label" for="g-n">Name</label><input id="g-n" name="name" class="form-control" required maxlength="100"></div>
+    <div class="mb-3"><label class="form-label" for="g-p">Phone</label><input id="g-p" name="phone" class="form-control" maxlength="20"></div>
+    <div><label class="form-label" for="g-u">Purpose</label><input id="g-u" name="purpose" class="form-control" maxlength="200"></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Register</button></div></form></div></div>
+</section>
+</body>
+</html>

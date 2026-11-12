@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Members', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Members</h2><p class="page-sub">Approve registrations and manage member accounts.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newMember"><i class="bi bi-person-plus me-1"></i>Add member</button>
+</div>
+<div class="card mb-3"><div class="card-body">
+  <form class="row g-2" method="get" th:action="@{/members}">
+    <div class="col-md-6"><input class="form-control" name="q" th:value="${q}" placeholder="Search name, email or member code"></div>
+    <div class="col-md-3"><select name="status" class="form-select"><option value="">All statuses</option>
+      <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}" th:selected="${s == status}">ACTIVE</option></select></div>
+    <div class="col-md-3 d-grid d-md-block"><button class="btn btn-outline-primary">Filter</button></div>
+  </form></div></div>
+<div class="card"><div class="table-responsive">
+  <table class="table table-hover mb-0">
+    <thead><tr><th>Member</th><th class="d-none d-md-table-cell">Code</th><th class="d-none d-lg-table-cell">Phone</th><th>Role</th><th>Status</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>
+      <tr th:each="u : ${members}">
+        <td><div class="d-flex align-items-center gap-2"><span th:replace="~{fragments/components :: avatar(${u.fullName})}"></span>
+          <div><a th:href="@{/members/{id}(id=${u.id})}" class="fw-semibold text-decoration-none" th:text="${u.fullName}">Name</a><div class="small text-muted" th:text="${u.email}">email</div></div></div></td>
+        <td class="d-none d-md-table-cell" th:text="${u.memberCode}">code</td>
+        <td class="d-none d-lg-table-cell" th:text="${u.phone}">phone</td>
+        <td class="text-capitalize" th:text="${#strings.toLowerCase(u.role.name())}">role</td>
+        <td><span th:replace="~{fragments/components :: badge(${u.status})}"></span></td>
+        <td class="text-end text-nowrap">
+          <form th:if="${u.status.name() == 'PENDING'}" class="d-inline" th:action="@{/members/{id}/decide(id=${u.id})}" method="post">
+            <button name="approve" value="true" class="btn btn-sm btn-success">Approve</button>
+            <button name="approve" value="false" class="btn btn-sm btn-outline-danger">Reject</button></form>
+          <a th:unless="${u.status.name() == 'PENDING'}" class="btn btn-sm btn-light" th:href="@{/members/{id}(id=${u.id})}">View</a>
+        </td>
+      </tr>
+      <tr th:if="${members.isEmpty()}"><td colspan="6"><div th:replace="~{fragments/components :: empty('No members found','bi-people')}"></div></td></tr>
+    </tbody></table></div></div>
+
+<div class="modal fade" id="newMember" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered">
+  <form class="modal-content" th:action="@{/members/create}" method="post">
+    <div class="modal-header"><h5 class="modal-title">Add member</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">
+      <div class="mb-3"><label class="form-label" for="nm-name">Full name</label><input id="nm-name" name="fullName" class="form-control" required maxlength="100"></div>
+      <div class="mb-3"><label class="form-label" for="nm-email">Email</label><input id="nm-email" name="email" type="email" class="form-control" required></div>
+      <div class="mb-1"><label class="form-label" for="nm-phone">Phone</label><input id="nm-phone" name="phone" class="form-control" maxlength="20"></div>
+      <div class="form-text">The member is approved immediately and receives a temporary password.</div>
+    </div>
+    <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Create</button></div>
+  </form></div></div>
+</section>
+</body>
+</html>

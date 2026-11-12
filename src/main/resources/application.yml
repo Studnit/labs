@@ -1,0 +1,35 @@
+spring:
+  application.name: smart-library
+  datasource:
+    # DB_* wins; otherwise the standard PG* variables (Railway/Render/Heroku-style Postgres plugins) are used
+    url: ${DB_URL:jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5432}/${PGDATABASE:smartlib}}
+    username: ${DB_USER:${PGUSER:smartlib}}
+    password: ${DB_PASSWORD:${PGPASSWORD:smartlib}}
+  jpa:
+    hibernate.ddl-auto: ${DDL_AUTO:update}
+    open-in-view: true
+  servlet.multipart:
+    max-file-size: 10MB
+    max-request-size: 12MB
+  thymeleaf.cache: ${THYMELEAF_CACHE:false}
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: native
+  servlet.session.cookie:
+    http-only: true
+    same-site: lax
+    secure: ${COOKIE_SECURE:false}
+  compression.enabled: true
+management:
+  endpoints.web.exposure.include: health,info
+  endpoint.health.probes.enabled: true
+app:
+  base-url: ${APP_BASE_URL:http://localhost:8080}
+  upload-dir: ${UPLOAD_DIR:./uploads}
+  seed-demo: ${SEED_DEMO:true}
+  super-admin-email: ${SUPERADMIN_EMAIL:superadmin@smartlib.local}
+  super-admin-password: ${SUPERADMIN_PASSWORD:ChangeMe#2026}
+  library-admin-email: ${LIBRARY_ADMIN_EMAIL:}
+  library-admin-password: ${LIBRARY_ADMIN_PASSWORD:}
+  reminder-days: 5
+  gateway-mock: ${GATEWAY_MOCK:true}

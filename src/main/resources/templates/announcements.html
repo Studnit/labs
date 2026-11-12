@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Announcements', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Announcements</h2></div>
+<div class="row g-3">
+  <div class="col-lg-4" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')"><div class="card"><div class="card-header">New announcement</div><div class="card-body">
+    <form th:action="@{/announcements}" method="post">
+      <div class="mb-3"><label class="form-label" for="a-t">Title</label><input id="a-t" name="title" class="form-control" required maxlength="150"></div>
+      <div class="mb-3"><label class="form-label" for="a-b">Message</label><textarea id="a-b" name="body" class="form-control" rows="4" required maxlength="4000"></textarea></div>
+      <div class="form-check mb-3"><input class="form-check-input" type="checkbox" name="pinned" value="true" id="a-p"><label class="form-check-label" for="a-p">Pin to top</label></div>
+      <button class="btn btn-primary w-100">Publish &amp; notify everyone</button></form></div></div></div>
+  <div class="col"><div class="vstack gap-3">
+    <div class="card" th:each="a : ${items}"><div class="card-body">
+      <div class="d-flex justify-content-between gap-2"><h3 class="h6 mb-1"><i class="bi bi-pin-angle-fill text-warning me-1" th:if="${a.pinned}"></i><span th:text="${a.title}">Title</span></h3>
+        <form th:action="@{/announcements/{id}/delete(id=${a.id})}" method="post" sec:authorize="hasAnyRole('LIBRARY_ADMIN','LIBRARIAN')" data-confirm="Delete this announcement?"><button class="btn btn-sm btn-link text-danger p-0"><i class="bi bi-trash"></i></button></form></div>
+      <p class="mb-2" style="white-space:pre-line" th:text="${a.body}">body</p>
+      <div class="small text-muted" th:text="${a.author.fullName} + ' · ' + ${#temporals.format(a.createdAt,'dd MMM yyyy HH:mm')}">meta</div></div></div>
+    <div class="card" th:if="${items.isEmpty()}"><div th:replace="~{fragments/components :: empty('No announcements yet','bi-megaphone')}"></div></div>
+  </div></div>
+</div>
+</section>
+</body>
+</html>

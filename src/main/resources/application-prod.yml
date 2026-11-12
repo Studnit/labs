@@ -1,0 +1,10 @@
+spring:
+  thymeleaf.cache: true
+  jpa.show-sql: false
+server:
+  servlet.session.cookie.secure: ${COOKIE_SECURE:true}
+  error.include-stacktrace: never
+  error.include-message: never
+app:
+  seed-demo: false
+logging.level.root: INFO

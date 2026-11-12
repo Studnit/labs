@@ -1,0 +1,12 @@
+# Local development: only PostgreSQL. Run the app with `mvn spring-boot:run`.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: smartlib
+      POSTGRES_USER: smartlib
+      POSTGRES_PASSWORD: smartlib
+    ports: ["5432:5432"]
+    volumes: [pgdata_dev:/var/lib/postgresql/data]
+volumes:
+  pgdata_dev:

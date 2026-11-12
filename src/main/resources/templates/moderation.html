@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Moderation', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Moderation queue</h2><p class="page-sub">Review content reported by members.</p></div>
+<div class="vstack gap-3">
+  <div class="card" th:each="r : ${reports}"><div class="card-body">
+    <div class="d-flex flex-wrap justify-content-between gap-2"><div><span class="badge text-bg-secondary" th:text="${r.targetType}">POST</span>
+      <span class="small text-muted ms-1" th:text="'Reported by ' + ${r.reporter.fullName} + ' · ' + ${#temporals.format(r.createdAt,'dd MMM HH:mm')}">meta</span></div>
+      <form class="d-flex gap-2" th:action="@{/moderation/{id}/resolve(id=${r.id})}" method="post">
+        <button name="hide" value="true" class="btn btn-sm btn-danger"><i class="bi bi-eye-slash me-1"></i>Hide content</button>
+        <button name="hide" value="false" class="btn btn-sm btn-outline-secondary">Dismiss</button></form></div>
+    <blockquote class="border-start border-3 ps-3 my-3 text-muted" style="white-space:pre-line" th:text="${r.snapshot}">content</blockquote>
+    <div><span class="fw-semibold">Reason:</span> <span th:text="${r.reason}">reason</span></div></div></div>
+  <div class="card" th:if="${reports.isEmpty()}"><div th:replace="~{fragments/components :: empty('Nothing to review — all clear','bi-shield-check')}"></div></div>
+</div>
+</section>
+</body>
+</html>

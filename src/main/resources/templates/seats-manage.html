@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Manage seats', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><a th:href="@{/seats}" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> Seat booking</a>
+  <h2 class="page-title mt-1">Manage seats</h2></div>
+<div class="row g-3">
+  <div class="col-lg-4"><div class="card"><div class="card-header">Add seats</div><div class="card-body"><form th:action="@{/seats/manage/add}" method="post">
+    <div class="mb-3"><label class="form-label" for="prefix">Label prefix</label><input id="prefix" name="prefix" class="form-control" placeholder="A" maxlength="10" required><div class="form-text">Creates A1, A2, … (a count of 1 creates exactly the prefix).</div></div>
+    <div class="mb-3"><label class="form-label" for="count">How many</label><input id="count" name="count" type="number" min="1" max="200" value="10" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label" for="zone">Zone</label><input id="zone" name="zone" class="form-control" maxlength="60" placeholder="Silent hall"></div>
+    <button class="btn btn-primary">Add seats</button></form></div></div></div>
+  <div class="col-lg-8"><div class="card"><div class="card-header">All seats</div><div class="card-body"><div class="seat-grid">
+    <div class="seat" th:each="s : ${allSeats}"><form th:action="@{/seats/manage/{id}/toggle(id=${s.id})}" method="post">
+      <button class="btn w-100 p-0 border-0 bg-transparent" type="submit" th:title="${s.active} ? 'Click to disable' : 'Click to enable'">
+        <label class="w-100" th:style="${!s.active} ? 'opacity:.5;border-style:dashed' : ''" style="cursor:pointer"><span th:text="${s.label}">A1</span><small th:text="${s.active} ? ${s.zone} : 'disabled'">zone</small></label></button></form></div>
+    <th:block th:if="${allSeats.isEmpty()}"><div th:replace="~{fragments/components :: empty('No seats yet','bi-grid-3x3-gap')}"></div></th:block></div></div></div></div>
+</div>
+</section>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Notifications', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3"><h2 class="page-title">Notifications</h2>
+  <form th:action="@{/notifications/read}" method="post"><button class="btn btn-outline-primary btn-sm">Mark all as read</button></form></div>
+<div class="card"><div class="list-group list-group-flush">
+  <form th:each="n : ${items}" th:action="@{/notifications/{id}/open(id=${n.id})}" method="post">
+    <input type="hidden" name="to" th:value="${n.link}">
+    <button class="list-group-item list-group-item-action d-flex gap-3 align-items-start text-start w-100" th:classappend="${!n.seen} ? 'bg-primary-subtle'">
+      <i class="bi bi-bell mt-1" th:classappend="${!n.seen} ? 'text-primary'"></i>
+      <span class="flex-grow-1"><span class="d-block fw-semibold" th:text="${n.title}">Title</span><span class="d-block small text-muted" th:text="${n.message}">msg</span></span>
+      <span class="small text-muted text-nowrap" th:text="${#temporals.format(n.createdAt,'dd MMM HH:mm')}">time</span></button></form>
+  <th:block th:if="${items.isEmpty()}"><div th:replace="~{fragments/components :: empty('You are all caught up','bi-bell-slash')}"></div></th:block></div></div>
+</section>
+</body>
+</html>

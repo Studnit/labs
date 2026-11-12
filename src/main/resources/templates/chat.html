@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Chat', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Chat</h2></div>
+  <div class="d-flex gap-2"><button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newDirect"><i class="bi bi-person me-1"></i>New message</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newGroup"><i class="bi bi-people me-1"></i>New group</button></div>
+</div>
+<div class="card" id="chat-root" th:attr="data-me=${meId},data-room=${activeRoom}">
+  <div class="chat-shell" th:classappend="${activeRoom != null} ? 'has-room'">
+    <div class="chat-list">
+      <a class="chat-room" th:each="r : ${rooms}" th:href="@{/chat(room=${r.id()})}" th:classappend="${r.id() == activeRoom} ? 'active'">
+        <span class="avatar"><i class="bi" th:classappend="${r.type().name() == 'DIRECT'} ? 'bi-person' : 'bi-people'"></i></span>
+        <span class="min-w-0"><span class="d-block fw-semibold text-truncate" th:text="${r.name()}">Room</span><span class="d-block small text-muted text-truncate" th:text="${r.last()}">last</span></span></a>
+      <th:block th:if="${rooms.isEmpty()}"><div th:replace="~{fragments/components :: empty('No conversations yet','bi-chat-dots')}"></div></th:block>
+    </div>
+    <div class="chat-pane">
+      <div th:if="${activeRoom == null}" class="empty my-auto"><i class="bi bi-chat-left-text"></i>Select a conversation or start a new one.</div>
+      <th:block th:if="${activeRoom != null}">
+        <div class="p-2 border-bottom d-md-none"><a th:href="@{/chat}" class="btn btn-sm btn-light"><i class="bi bi-arrow-left"></i> Conversations</a></div>
+        <div id="chat-messages" class="chat-messages" aria-live="polite"></div>
+        <form id="chat-form" class="p-2 border-top d-flex gap-2"><input id="chat-input" class="form-control" maxlength="2000" placeholder="Type a message…" autocomplete="off" aria-label="Message"><button class="btn btn-primary" aria-label="Send"><i class="bi bi-send"></i></button></form>
+      </th:block>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="newDirect" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+  <div class="modal-header"><h5 class="modal-title">New message</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="list-group list-group-flush"><form th:each="p : ${people}" th:action="@{/chat/direct/{id}(id=${p.id})}" method="post">
+    <button class="list-group-item list-group-item-action d-flex gap-2 align-items-center"><span th:replace="~{fragments/components :: avatar(${p.fullName})}"></span><span th:text="${p.fullName}">n</span>
+      <span class="badge text-bg-light ms-auto text-capitalize" th:text="${#strings.toLowerCase(p.role.name())}">r</span></button></form></div></div></div></div>
+<div class="modal fade" id="newGroup" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><form class="modal-content" th:action="@{/chat/groups}" method="post">
+  <div class="modal-header"><h5 class="modal-title">New group</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body"><div class="mb-3"><label class="form-label" for="g-name">Group name</label><input id="g-name" name="name" class="form-control" required maxlength="80"></div>
+    <div class="form-label">Members</div>
+    <div class="form-check" th:each="p : ${people}"><input class="form-check-input" type="checkbox" name="memberIds" th:value="${p.id}" th:id="'gm-' + ${p.id}"><label class="form-check-label" th:for="'gm-' + ${p.id}" th:text="${p.fullName}">n</label></div></div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Create group</button></div></form></div></div>
+</section>
+</body>
+</html>

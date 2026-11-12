@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Question', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><a th:href="@{/forum}" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> All questions</a></div>
+<div class="card mb-3"><div class="card-body">
+  <div class="d-flex justify-content-between gap-2"><h2 class="h4" th:text="${q.title}">Title</h2><th:block th:replace="~{fragments/components :: reportBtn('QUESTION', ${q.id})}"></th:block></div>
+  <div class="small text-muted mb-3" th:text="${q.author.fullName} + ' · ' + ${#temporals.format(q.createdAt,'dd MMM yyyy HH:mm')}">meta</div>
+  <p style="white-space:pre-line" th:text="${q.body}">body</p>
+  <span class="badge text-bg-success" th:if="${q.resolved}">Resolved</span></div></div>
+<h3 class="h6 text-muted text-uppercase mb-2" th:text="${answers.size()} + ' answer(s)'">Answers</h3>
+<div class="card mb-2" th:each="a : ${answers}" th:classappend="${a.accepted} ? 'border-success'"><div class="card-body">
+  <div class="d-flex justify-content-between"><span class="fw-semibold" th:text="${a.author.fullName}">n</span>
+    <span class="d-flex gap-2 align-items-center"><span class="badge text-bg-success" th:if="${a.accepted}"><i class="bi bi-check2"></i> Accepted</span>
+      <form th:if="${!a.accepted and (@ctx.staff() or q.author.id == @ctx.id())}" th:action="@{/forum/q/{q}/accept/{a}(q=${q.id},a=${a.id})}" method="post"><button class="btn btn-sm btn-outline-success">Accept</button></form>
+      <th:block th:replace="~{fragments/components :: reportBtn('ANSWER', ${a.id})}"></th:block></span></div>
+  <p class="mb-0 mt-2" style="white-space:pre-line" th:text="${a.body}">body</p></div></div>
+<div class="card mt-3"><div class="card-body"><form th:action="@{/forum/q/{id}/answer(id=${q.id})}" method="post">
+  <label class="form-label" for="ans">Your answer</label><textarea id="ans" name="body" class="form-control mb-2" rows="4" required maxlength="5000"></textarea><button class="btn btn-primary">Post answer</button></form></div></div>
+<div th:replace="~{fragments/components :: reportModal}"></div>
+</section>
+</body>
+</html>

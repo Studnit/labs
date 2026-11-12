@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Staff', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Staff accounts</h2></div>
+<div class="row g-3">
+  <div class="col-lg-4"><div class="card"><div class="card-header">Add staff</div><div class="card-body"><form th:action="@{/admin/staff}" method="post">
+    <div class="mb-3"><label class="form-label" for="st-n">Full name</label><input id="st-n" name="fullName" class="form-control" required maxlength="100"></div>
+    <div class="mb-3"><label class="form-label" for="st-e">Email</label><input id="st-e" name="email" type="email" class="form-control" required></div>
+    <div class="mb-3"><label class="form-label" for="st-p">Temporary password</label><input id="st-p" name="password" type="password" class="form-control" minlength="8" maxlength="72" autocomplete="new-password" required></div>
+    <div class="mb-3"><label class="form-label" for="st-r">Role</label><select id="st-r" name="role" class="form-select"><option value="LIBRARIAN">Librarian</option><option value="LIBRARY_ADMIN">Library admin</option></select></div>
+    <button class="btn btn-primary w-100">Create account</button></form></div></div></div>
+  <div class="col-lg-8"><div class="card"><div class="table-responsive"><table class="table mb-0"><thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead><tbody>
+    <tr th:each="u : ${staff}"><td th:text="${u.fullName}">n</td><td th:text="${u.email}">e</td><td class="text-capitalize" th:text="${#strings.replace(#strings.toLowerCase(u.role.name()),'_',' ')}">r</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+</body>
+</html>

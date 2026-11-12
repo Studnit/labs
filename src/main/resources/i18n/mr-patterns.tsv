@@ -1,0 +1,63 @@
+# regex<TAB>replacement ($1.. = captured groups). Whole text must match.
+Hello,\s+(.+)	नमस्कार, $1
+Welcome,\s+(.+)	स्वागत, $1
+Overview for (.+)	$1 चा आढावा
+Since (\d{2}:\d{2})	$1 पासून
+Since (.+?) · (.+)	$1 पासून · $2
+Valid until (.+?) \((\d+) days left\)	$1 पर्यंत वैध ($2 दिवस शिल्लक)
+Valid until (.+?) · (\d+) days left	$1 पर्यंत वैध · $2 दिवस शिल्लक
+Valid until (.+)	$1 पर्यंत वैध
+(\d+) days left	$1 दिवस शिल्लक
+(\d+) days · ₹(.+)	$1 दिवस · ₹$2
+(\d+) days	$1 दिवस
+Seat ([A-Za-z0-9\-]+)	आसन $1
+Reserved until (.+)	$1 पर्यंत राखीव
+Reserved for you until (.+)	तुमच्यासाठी $1 पर्यंत राखीव
+until (\d.+)	$1 पर्यंत
+Due (.+)	देय $1
+(.+) is turned off	$1 बंद आहे
+(\d+) answer\(s\)	$1 उत्तर(रे)
+(.+) — ₹(.+)	$1 — ₹$2
+(\d+)h (\d+)m	$1 तास $2 मि
+(\d+) \((\d+) available\)	$1 ($2 उपलब्ध)
+Reported by (.+?) · (.+)	$1 यांनी तक्रार केली · $2
+Ref: (.+)	संदर्भ: $1
+Issue (.+)	$1 द्या
+(\d+) seat\(s\) added	$1 आसन(ने) जोडली
+Seat (\S+) is reserved for you until (.+)	आसन $1 तुमच्यासाठी $2 पर्यंत राखीव आहे
+Seat (\S+) allocated to (.+)	आसन $1 हे $2 यांना नेमले
+Seat (\S+) is reserved for you until (.+)\.	आसन $1 तुमच्यासाठी $2 पर्यंत राखीव आहे.
+Seat booked for (.+)	आसन $1 साठी आरक्षित केले
+(.+) valid until (.+)	$1 — $2 पर्यंत वैध
+You already have an active subscription \((\d+) days left\)\. You can renew in the last (\d+) days\.	तुमची सदस्यता आधीच सक्रिय आहे ($1 दिवस शिल्लक). तुम्ही शेवटच्या $2 दिवसांत नूतनीकरण करू शकता.
+The library is open (.+) – (.+)	ग्रंथालय $1 ते $2 पर्यंत उघडे असते
+Member already has (\d+) books issued	सदस्याकडे आधीच $1 पुस्तके दिलेली आहेत
+Cannot set copies below the (\d+) currently issued	सध्या दिलेल्या $1 प्रतींपेक्षा कमी प्रती ठेवता येत नाहीत
+File type not allowed: \.(.+)	फाइल प्रकारास परवानगी नाही: .$1
+(.+) paid (.+) \(ref (.+)\)	$1 यांनी $2 भरले (संदर्भ $3)
+Seat (\S+) is reserved for you until (\S+)	आसन $1 तुमच्यासाठी $2 पर्यंत राखीव आहे
+(.+) subscribed from (.+) but every seat is taken	$1 यांनी $2 पासून सदस्यता घेतली पण सर्व आसने भरलेली आहेत
+(.+) received — receipt (.+)	$1 मिळाले — पावती $2
+We could not verify your payment of (.+)	आम्ही तुमचे $1 चे पेमेंट तपासू शकलो नाही
+(.+) approved	$1 मंजूर
+Issued — due (.+)	दिले — देय $1
+Member created\. Temporary password \(share securely, shown once\): (.+)	सदस्य तयार केला. तात्पुरता पासवर्ड (सुरक्षितपणे द्या, फक्त एकदा दिसतो): $1
+Payment recorded — receipt (.+)	पेमेंट नोंदवले — पावती $1
+Payment successful — receipt (.+)	पेमेंट यशस्वी — पावती $1
+Returned — late fine (.+)	परत केले — विलंब दंड $1
+Status updated to (.+)	स्थिती $1 अशी बदलली
+(.+) enabled	$1 चालू केले
+(.+) disabled	$1 बंद केले
+Checked out after (\d+) minutes\. See you soon!	$1 मिनिटांनी चेक-आउट केले. लवकर भेटू!
+(.+) is already checked in	$1 यांनी आधीच चेक-इन केले आहे
+Seat (\S+) is not free for (.+) – (.+)	आसन $1 हे $2 – $3 साठी मोकळे नाही
+Seat (\S+) is reserved for you until (.+)	आसन $1 तुमच्यासाठी $2 पर्यंत राखीव आहे
+Seat (\S+) is reserved for you until (\S+) \(auto-allocated\)	आसन $1 तुमच्यासाठी $2 पर्यंत राखीव आहे
+Seat (\S+) is reserved for you	आसन $1 तुमच्यासाठी राखीव आहे
+(.+) — (.+) valid until (.+)	$1 — $2, $3 पर्यंत वैध
+(.+) valid until (.+)	$1 — $2 पर्यंत वैध
+Seat booked for (.+?) (\d\d:\d\d)–(\d\d:\d\d)	$1 रोजी $2–$3 साठी आसन आरक्षित केले
+Announcement: (.+)	घोषणा: $1
+(.+) · (\d+) KB	$1 · $2 KB
+(\d+)h	$1 तास
+(\d+)m	$1 मि

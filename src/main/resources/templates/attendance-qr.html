@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Entrance QR', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3 no-print">
+  <div><h2 class="page-title">Entrance QR code</h2><p class="page-sub">Print and place at the entrance. Members scan it to check in and out.</p></div>
+  <div class="d-flex gap-2"><button class="btn btn-primary" onclick="window.print()"><i class="bi bi-printer me-1"></i>Print</button>
+    <form th:action="@{/attendance/qr/rotate}" method="post" sec:authorize="hasRole('LIBRARY_ADMIN')" data-confirm="Regenerate the QR? The printed code will stop working.">
+      <button class="btn btn-outline-danger"><i class="bi bi-arrow-repeat me-1"></i>Regenerate</button></form></div>
+</div>
+<div class="card mx-auto" style="max-width:480px"><div class="card-body text-center qr-box p-4">
+  <h3 class="h4" th:text="${lib.name}">Library</h3>
+  <img th:src="@{/attendance/qr.png}" alt="Attendance QR code" class="my-3">
+  <p class="fw-semibold mb-1">Scan to check in / check out</p>
+  <p class="small text-muted mb-0 text-break no-print" th:text="${scanUrl}">url</p>
+</div></div>
+</section>
+</body>
+</html>

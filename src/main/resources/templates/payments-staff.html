@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Payments', ~{::section})}">
+<body>
+<section>
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+  <div><h2 class="page-title">Payments</h2><p class="page-sub">Record cash/UPI, verify member payments and issue receipts.</p></div>
+  <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#collect"><i class="bi bi-plus-lg me-1"></i>Record payment</button>
+</div>
+<div class="card"><div class="table-responsive"><table class="table table-hover mb-0">
+  <thead><tr><th>Date</th><th>Member</th><th class="d-none d-md-table-cell">For</th><th>Method</th><th class="text-end">Amount</th><th>Status</th><th class="text-end">Actions</th></tr></thead><tbody>
+  <tr th:each="p : ${payments}">
+    <td class="text-nowrap" th:text="${#temporals.format(p.createdAt,'dd MMM HH:mm')}">d</td>
+    <td th:text="${p.member.fullName}">m</td>
+    <td class="d-none d-md-table-cell"><span th:text="${p.purpose}">purpose</span><div class="small text-muted" th:if="${p.reference != null}" th:text="'Ref: ' + ${p.reference}">ref</div></td>
+    <td><span class="badge text-bg-light" th:text="${p.method}">CASH</span></td>
+    <td class="text-end text-nowrap" th:text="'₹' + ${#numbers.formatDecimal(p.amount,1,'COMMA',2,'POINT')}">₹0</td>
+    <td><span th:replace="~{fragments/components :: badge(${p.status})}"></span></td>
+    <td class="text-end text-nowrap">
+      <form th:if="${p.status.name() == 'PENDING'}" class="d-inline" th:action="@{/payments/{id}/verify(id=${p.id})}" method="post">
+        <button name="approve" value="true" class="btn btn-sm btn-success">Mark paid</button>
+        <button name="approve" value="false" class="btn btn-sm btn-outline-danger">Reject</button></form>
+      <a th:if="${p.status.name() == 'PAID'}" class="btn btn-sm btn-light" th:href="@{/payments/{id}/receipt.pdf(id=${p.id})}" target="_blank" rel="noopener"><i class="bi bi-receipt"></i> Receipt</a></td></tr>
+  <tr th:if="${payments.isEmpty()}"><td colspan="7"><div th:replace="~{fragments/components :: empty('No payments yet','bi-cash-coin')}"></div></td></tr></tbody></table></div></div>
+
+<div class="modal fade" id="collect" tabindex="-1" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/payments/collect}" method="post">
+  <div class="modal-header"><h5 class="modal-title">Record payment</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+  <div class="modal-body">
+    <div class="mb-3"><label class="form-label" for="c-m">Member</label><select id="c-m" name="memberId" class="form-select" required><option value="">Choose…</option><option th:each="m : ${members}" th:value="${m.id}" th:text="${m.fullName}">m</option></select></div>
+    <div class="mb-3" th:if="${@features.on('SUBSCRIPTIONS')}"><label class="form-label" for="c-p">Subscription plan (optional)</label><select id="c-p" name="planId" class="form-select"><option value="">— Other payment —</option><option th:each="p : ${plans}" th:if="${p.active}" th:value="${p.id}" th:text="${p.name} + ' — ₹' + ${p.price}">p</option></select></div>
+    <div class="row g-3"><div class="col-6"><label class="form-label" for="c-a">Amount (₹)</label><input id="c-a" name="amount" type="number" min="0.01" step="0.01" class="form-control"><div class="form-text">Ignored when a plan is chosen.</div></div>
+      <div class="col-6"><label class="form-label" for="c-method">Method</label><select id="c-method" name="method" class="form-select"><option th:each="m : ${methods}" th:value="${m}" th:text="${m}">CASH</option></select></div></div>
+    <div class="mt-3"><label class="form-label" for="c-ref">UPI reference</label><input id="c-ref" name="reference" class="form-control" maxlength="100"></div>
+    <div class="mt-3"><label class="form-label" for="c-pur">Purpose (for other payments)</label><input id="c-pur" name="purpose" class="form-control" maxlength="150" placeholder="Locker fee, late fine, …"></div>
+  </div>
+  <div class="modal-footer"><button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button><button class="btn btn-primary">Save</button></div></form></div></div>
+</section>
+</body>
+</html>

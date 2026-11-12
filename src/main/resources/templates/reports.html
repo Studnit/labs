@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Reports', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Reports &amp; analytics</h2><p class="page-sub">Only modules enabled for your library are included.</p></div>
+<form class="card card-body mb-3" method="get" th:action="@{/reports}"><div class="row g-2 align-items-end">
+  <div class="col-6 col-md-3"><label class="form-label" for="from">From</label><input id="from" type="date" name="from" th:value="${summary.from()}" class="form-control"></div>
+  <div class="col-6 col-md-3"><label class="form-label" for="to">To</label><input id="to" type="date" name="to" th:value="${summary.to()}" class="form-control"></div>
+  <div class="col-12 col-md-2 d-grid"><button class="btn btn-primary">Apply</button></div></div></form>
+<div class="row g-3 mb-3">
+  <div class="col-6 col-lg-3" th:if="${summary.visits() != null}"><div th:replace="~{fragments/components :: statCard('Visits', ${summary.visits()}, 'bi-activity', 'primary')}"></div></div>
+  <div class="col-6 col-lg-3" th:if="${summary.uniqueVisitors() != null}"><div th:replace="~{fragments/components :: statCard('Unique visitors', ${summary.uniqueVisitors()}, 'bi-people', 'info')}"></div></div>
+  <div class="col-6 col-lg-3" th:if="${summary.revenue() != null}"><div th:replace="~{fragments/components :: statCard('Revenue', |₹${#numbers.formatDecimal(summary.revenue(),1,'COMMA',2,'POINT')}|, 'bi-cash-coin', 'success')}"></div></div>
+  <div class="col-6 col-lg-3"><div th:replace="~{fragments/components :: statCard('New members', ${summary.newMembers()}, 'bi-person-plus', 'warning')}"></div></div>
+  <div class="col-6 col-lg-3" th:if="${summary.booksIssued() != null}"><div th:replace="~{fragments/components :: statCard('Books issued', ${summary.booksIssued()}, 'bi-book', 'secondary')}"></div></div>
+  <div class="col-6 col-lg-3" th:if="${summary.guests() != null}"><div th:replace="~{fragments/components :: statCard('Guests', ${summary.guests()}, 'bi-person-badge', 'secondary')}"></div></div>
+</div>
+<div class="row g-3 mb-3">
+  <div class="col-lg-6" th:if="${summary.visitsSeries() != null}"><div class="card"><div class="card-header">Daily visits</div><div class="card-body"><canvas id="visitsChart" height="150"></canvas></div></div></div>
+  <div class="col-lg-6" th:if="${summary.revenueSeries() != null}"><div class="card"><div class="card-header">Daily revenue (₹)</div><div class="card-body"><canvas id="revenueChart" height="150"></canvas></div></div></div>
+</div>
+<div class="card"><div class="card-header">Export</div><div class="card-body"><div class="row g-2">
+  <div class="col-md-6 col-lg-4" th:each="t : ${exportTypes}"><div class="d-flex justify-content-between align-items-center border rounded-3 p-2 px-3">
+    <span class="fw-semibold" th:text="${t.value}">Type</span>
+    <span class="d-flex gap-1">
+      <a class="btn btn-sm btn-outline-success" th:href="@{/reports/export/{t}/xlsx(t=${t.key},from=${summary.from()},to=${summary.to()})}"><i class="bi bi-file-earmark-excel"></i> Excel</a>
+      <a class="btn btn-sm btn-outline-danger" th:href="@{/reports/export/{t}/pdf(t=${t.key},from=${summary.from()},to=${summary.to()})}"><i class="bi bi-file-earmark-pdf"></i> PDF</a></span></div></div></div></div></div>
+<script th:src="@{/webjars/chart.js/4.4.3/dist/chart.umd.js}"></script>
+<script th:inline="javascript">
+  const labels = /*[[${summary.labels()}]]*/ [];
+  const v = /*[[${summary.visitsSeries()}]]*/ null, r = /*[[${summary.revenueSeries()}]]*/ null;
+  const opts = { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } }, elements: { point: { radius: 0 } } };
+  if (v) new Chart(document.getElementById('visitsChart'), { type: 'line', data: { labels, datasets: [{ data: v, borderColor: '#4f46e5', backgroundColor: 'rgba(79,70,229,.12)', fill: true, tension: .3 }] }, options: opts });
+  if (r) new Chart(document.getElementById('revenueChart'), { type: 'bar', data: { labels, datasets: [{ data: r, backgroundColor: '#16a34a', borderRadius: 4 }] }, options: opts });
+</script>
+</section>
+</body>
+</html>

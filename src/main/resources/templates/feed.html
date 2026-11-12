@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Community feed', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">Community feed</h2><p class="page-sub">Share updates, tips and photos with fellow members.</p></div>
+<div class="row justify-content-center"><div class="col-xl-8">
+  <div class="card mb-3"><div class="card-body"><form th:action="@{/feed}" method="post" enctype="multipart/form-data">
+    <textarea name="content" class="form-control mb-2" rows="3" maxlength="4000" placeholder="What's on your mind?" required aria-label="Post content"></textarea>
+    <div class="d-flex flex-wrap justify-content-between gap-2 align-items-center">
+      <input type="file" name="image" accept="image/*" class="form-control form-control-sm" style="max-width:280px" aria-label="Attach image">
+      <button class="btn btn-primary"><i class="bi bi-send me-1"></i>Post</button></div></form></div></div>
+
+  <div class="card mb-3" th:each="pv : ${posts}" th:id="'post-' + ${pv.post().id}"><div class="card-body">
+    <div class="d-flex justify-content-between align-items-start">
+      <div class="d-flex gap-2 align-items-center"><span th:replace="~{fragments/components :: avatar(${pv.post().author.fullName})}"></span>
+        <div><div class="fw-semibold" th:text="${pv.post().author.fullName}">Name</div><div class="small text-muted" th:text="${#temporals.format(pv.post().createdAt,'dd MMM yyyy HH:mm')}">date</div></div></div>
+      <div class="d-flex align-items-center gap-2">
+        <span class="badge text-bg-warning" th:if="${pv.post().pinned}"><i class="bi bi-pin-angle-fill"></i> Pinned</span>
+        <th:block th:replace="~{fragments/components :: reportBtn('POST', ${pv.post().id})}"></th:block>
+        <form th:if="${@ctx.staff() or pv.post().author.id == @ctx.id()}" th:action="@{/feed/{id}/delete(id=${pv.post().id})}" method="post" data-confirm="Remove this post?"><button class="btn btn-sm btn-link text-danger p-0" title="Remove"><i class="bi bi-trash"></i></button></form>
+        <form th:if="${@ctx.staff()}" th:action="@{/feed/{id}/pin(id=${pv.post().id})}" method="post"><button class="btn btn-sm btn-link p-0" title="Pin / unpin"><i class="bi bi-pin"></i></button></form></div></div>
+    <p class="mt-3 mb-2" style="white-space:pre-line" th:text="${pv.post().content}">content</p>
+    <img th:if="${pv.post().imageName != null}" th:src="@{/files/feed/{n}(n=${pv.post().imageName})}" class="post-img mb-2" alt="Post image" loading="lazy">
+    <div class="d-flex gap-3 border-top pt-2">
+      <button class="btn btn-sm btn-link text-decoration-none like-btn p-0" th:classappend="${pv.liked()} ? 'liked'" th:attr="data-like=${pv.post().id}">
+        <i class="bi" th:classappend="${pv.liked()} ? 'bi-heart-fill' : 'bi-heart'"></i> <span th:text="${pv.likes()}">0</span></button>
+      <span class="text-muted"><i class="bi bi-chat"></i> <span th:text="${pv.comments().size()}">0</span></span></div>
+    <div class="mt-2" th:each="c : ${pv.comments()}"><div class="bg-light rounded-3 p-2 px-3">
+      <div class="d-flex justify-content-between"><span class="fw-semibold small" th:text="${c.author.fullName}">n</span>
+        <th:block th:replace="~{fragments/components :: reportBtn('COMMENT', ${c.id})}"></th:block></div>
+      <div style="white-space:pre-line" th:text="${c.content}">c</div></div></div>
+    <form class="d-flex gap-2 mt-2" th:action="@{/feed/{id}/comment(id=${pv.post().id})}" method="post">
+      <input name="content" class="form-control form-control-sm" placeholder="Write a comment…" maxlength="2000" required aria-label="Comment"><button class="btn btn-sm btn-outline-primary">Send</button></form>
+  </div></div>
+  <div class="card" th:if="${posts.isEmpty()}"><div th:replace="~{fragments/components :: empty('No posts yet — be the first!','bi-chat-square-heart')}"></div></div>
+  <div class="d-flex justify-content-between mb-4"><a class="btn btn-light" th:if="${page > 0}" th:href="@{/feed(page=${page - 1})}">Newer</a><span></span>
+    <a class="btn btn-light" th:if="${posts.size() == 10}" th:href="@{/feed(page=${page + 1})}">Older</a></div>
+</div></div>
+<div th:replace="~{fragments/components :: reportModal}"></div>
+</section>
+</body>
+</html>

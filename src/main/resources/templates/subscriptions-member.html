@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Subscriptions', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">My subscription</h2></div>
+<div class="hero-banner mb-3" th:if="${current != null}">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+    <div><div class="small opacity-75">Current plan</div><h2 th:text="${current.plan != null} ? ${current.plan.name} : 'Active'">Plan</h2>
+      <div th:text="'Valid until ' + ${#temporals.format(current.endDate,'dd MMM yyyy')} + ' · ' + ${daysLeft} + ' days left'">until</div></div>
+    <a class="btn btn-light text-primary fw-semibold" th:if="${@features.on('SEAT_BOOKING')}" th:href="@{/seats}"><i class="bi bi-grid-3x3-gap me-1"></i>My seat</a>
+  </div>
+</div>
+<div class="notice-lock p-3 mb-3" th:if="${current == null}"><div class="fw-bold text-danger"><i class="bi bi-exclamation-circle me-1"></i>No active subscription</div>
+  <div class="text-muted small">Choose a plan below to start using the library. A seat is allocated to you automatically.</div></div>
+<div class="alert alert-success" th:if="${current != null and !canRenew}"><i class="bi bi-check-circle me-1"></i>Your subscription is active, so there is nothing to buy right now. Renewal opens in the last 7 days.</div>
+<div class="alert alert-info" th:if="${current != null and canRenew}"><i class="bi bi-alarm me-1"></i>Your plan ends soon. Renew now and the new period starts right after it, keeping your seat when it is free.</div>
+
+<h3 class="h6 text-muted text-uppercase mb-2">Available plans</h3>
+<div class="row g-3 mb-4">
+  <div class="col-sm-6 col-lg-4" th:each="p : ${plans}"><div class="card card-hover h-100" th:classappend="${current != null and !canRenew} ? 'opacity-75'"><div class="card-body d-flex flex-column">
+    <div class="h5" th:text="${p.name}">Plan</div><div class="display-6 fw-bold" th:text="'₹' + ${p.price}">₹500</div>
+    <div class="text-muted mb-3" th:text="${p.durationDays} + ' days'">30 days</div>
+    <th:block th:if="${canRenew}">
+      <a class="btn btn-primary mt-auto" th:if="${@features.on('PAYMENTS')}" sec:authorize="hasRole('MEMBER')" th:href="@{/payments/checkout(planId=${p.id})}" th:text="${current == null} ? 'Take this plan' : 'Renew with this plan'">Buy</a>
+      <span class="text-muted small mt-auto" th:unless="${@features.on('PAYMENTS')}">Ask the library desk to activate this plan.</span>
+    </th:block>
+    <span class="btn btn-light disabled mt-auto" th:unless="${canRenew}"><i class="bi bi-check2 me-1"></i>Already subscribed</span>
+  </div></div></div>
+  <div class="col-12" th:if="${plans.isEmpty()}"><div th:replace="~{fragments/components :: empty('No plans available','bi-card-checklist')}"></div></div>
+</div>
+<div class="card"><div class="card-header">History</div><div class="table-responsive"><table class="table mb-0"><thead><tr><th>Plan</th><th>Period</th><th>Status</th></tr></thead><tbody>
+  <tr th:each="s : ${mySubscriptions}"><td th:text="${s.plan != null} ? ${s.plan.name} : '-'">p</td><td th:text="${s.startDate} + ' → ' + ${s.endDate}">p</td><td><span th:replace="~{fragments/components :: badge(${s.status})}"></span></td></tr>
+  <tr th:if="${mySubscriptions.isEmpty()}"><td colspan="3" class="text-center text-muted">No subscriptions yet</td></tr></tbody></table></div></div>
+</section>
+</body>
+</html>

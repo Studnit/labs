@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Payments', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><h2 class="page-title">My payments</h2><p class="page-sub">Receipts are available once a payment is confirmed.</p></div>
+<div class="card"><div class="table-responsive"><table class="table mb-0">
+  <thead><tr><th>Date</th><th>For</th><th>Method</th><th class="text-end">Amount</th><th>Status</th><th></th></tr></thead><tbody>
+  <tr th:each="p : ${payments}"><td class="text-nowrap" th:text="${#temporals.format(p.createdAt,'dd MMM yyyy')}">d</td><td th:text="${p.purpose}">p</td><td th:text="${p.method}">m</td>
+    <td class="text-end" th:text="'₹' + ${#numbers.formatDecimal(p.amount,1,'COMMA',2,'POINT')}">0</td><td><span th:replace="~{fragments/components :: badge(${p.status})}"></span></td>
+    <td class="text-end text-nowrap"><a th:if="${p.status.name() == 'PAID'}" class="btn btn-sm btn-light" th:href="@{/payments/{id}/receipt.pdf(id=${p.id})}" target="_blank" rel="noopener"><i class="bi bi-receipt"></i> Receipt</a>
+      <a th:if="${p.status.name() == 'PENDING' and p.method.name() == 'ONLINE'}" class="btn btn-sm btn-primary" th:href="@{/payments/{id}/gateway(id=${p.id})}">Pay now</a></td></tr>
+  <tr th:if="${payments.isEmpty()}"><td colspan="6"><div th:replace="~{fragments/components :: empty('No payments yet','bi-cash-coin')}"></div></td></tr></tbody></table></div></div>
+</section>
+</body>
+</html>

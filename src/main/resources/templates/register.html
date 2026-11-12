@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/public :: shell('Register', ~{::section})}">
+<body>
+<section>
+<div class="auth-wrap">
+  <div class="card auth-card" style="max-width:520px">
+    <h1 class="h4 fw-bold">Create your account</h1>
+    <p class="text-muted">Members are approved by the library before first sign-in.</p>
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <form th:action="@{/register}" th:object="${form}" method="post" novalidate>
+      <div class="mb-3"><label class="form-label" for="libraryId">Library</label>
+        <select id="libraryId" th:field="*{libraryId}" class="form-select" th:errorclass="is-invalid" required>
+          <option value="">Choose a library…</option>
+          <option th:each="l : ${libraries}" th:value="${l.id}" th:text="${l.name}">Library</option>
+        </select><div class="invalid-feedback" th:errors="*{libraryId}"></div></div>
+      <div class="mb-3"><label class="form-label" for="fullName">Full name</label>
+        <input id="fullName" th:field="*{fullName}" class="form-control" th:errorclass="is-invalid" maxlength="100" required>
+        <div class="invalid-feedback" th:errors="*{fullName}"></div></div>
+      <div class="row g-3 mb-3">
+        <div class="col-md-7"><label class="form-label" for="email">Email</label>
+          <input id="email" type="email" th:field="*{email}" class="form-control" th:errorclass="is-invalid" required>
+          <div class="invalid-feedback" th:errors="*{email}"></div></div>
+        <div class="col-md-5"><label class="form-label" for="phone">Phone</label>
+          <input id="phone" th:field="*{phone}" class="form-control" maxlength="20"></div>
+      </div>
+      <div class="mb-3"><label class="form-label" for="password">Password</label>
+        <input id="password" type="password" th:field="*{password}" class="form-control" th:errorclass="is-invalid" autocomplete="new-password" required>
+        <div class="invalid-feedback" th:errors="*{password}"></div><div class="form-text">At least 8 characters.</div></div>
+      <div class="form-check mb-3">
+        <input class="form-check-input" type="checkbox" th:field="*{guest}" id="guest">
+        <label class="form-check-label" for="guest">I'm just visiting — create a limited guest account (no approval needed)</label>
+      </div>
+      <button class="btn btn-primary w-100 btn-lg" type="submit">Register</button>
+    </form>
+    <p class="text-center text-muted mt-3 mb-0">Already registered? <a th:href="@{/login}">Sign in</a></p>
+  </div>
+</div>
+</section>
+</body>
+</html>

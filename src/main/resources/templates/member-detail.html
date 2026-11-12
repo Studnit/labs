@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{fragments/layout :: layout('Member', ~{::section})}">
+<body>
+<section>
+<div class="mb-3"><a th:href="@{/members}" class="text-decoration-none small"><i class="bi bi-arrow-left"></i> All members</a></div>
+<div class="card mb-3"><div class="card-body d-flex flex-wrap gap-3 justify-content-between align-items-center">
+  <div class="d-flex gap-3 align-items-center">
+    <span class="avatar" style="width:60px;height:60px;font-size:1.5rem" th:text="${#strings.substring(member.fullName,0,1)}">A</span>
+    <div><h2 class="h4 mb-0" th:text="${member.fullName}">Name</h2>
+      <div class="text-muted" th:text="${member.email} + (${member.phone != null} ? ' · ' + ${member.phone} : '')">email</div>
+      <div class="mt-1"><span th:replace="~{fragments/components :: badge(${member.status})}"></span>
+        <span class="small text-muted ms-1" th:text="${member.memberCode}">code</span></div></div></div>
+  <form class="d-flex gap-2" th:action="@{/members/{id}/status(id=${member.id})}" method="post" th:if="${member.role.name() == 'MEMBER' or member.role.name() == 'GUEST'}">
+    <button name="status" value="ACTIVE" class="btn btn-outline-success" th:if="${member.status.name() != 'ACTIVE'}">Activate</button>
+    <button name="status" value="SUSPENDED" class="btn btn-outline-danger" th:if="${member.status.name() == 'ACTIVE'}" data-confirm="Suspend this account?">Suspend</button>
+  </form>
+</div></div>
+<div class="row g-3">
+  <div class="col-lg-6" th:if="${subscriptions != null}"><div class="card h-100"><div class="card-header">Subscriptions</div><div class="table-responsive"><table class="table mb-0">
+    <thead><tr><th>Plan</th><th>Period</th><th>Status</th></tr></thead><tbody>
+    <tr th:each="s : ${subscriptions}"><td th:text="${s.plan != null} ? ${s.plan.name} : '-'">plan</td><td class="text-nowrap" th:text="${s.startDate} + ' → ' + ${s.endDate}">period</td><td><span th:replace="~{fragments/components :: badge(${s.status})}"></span></td></tr>
+    <tr th:if="${subscriptions.isEmpty()}"><td colspan="3" class="text-muted text-center">No subscriptions</td></tr></tbody></table></div></div></div>
+  <div class="col-lg-6" th:if="${sessions != null}"><div class="card h-100"><div class="card-header">Recent attendance</div><div class="table-responsive"><table class="table mb-0">
+    <thead><tr><th>In</th><th>Out</th><th>Method</th></tr></thead><tbody>
+    <tr th:each="a : ${sessions}"><td th:text="${#temporals.format(a.checkIn,'dd MMM HH:mm')}">in</td><td th:text="${a.checkOut != null} ? ${#temporals.format(a.checkOut,'HH:mm')} : '—'">out</td><td th:text="${a.method}">QR</td></tr>
+    <tr th:if="${sessions.isEmpty()}"><td colspan="3" class="text-muted text-center">No visits yet</td></tr></tbody></table></div></div></div>
+  <div class="col-12" th:if="${books != null}"><div class="card"><div class="card-header">Books</div><div class="table-responsive"><table class="table mb-0">
+    <thead><tr><th>Book</th><th>Issued</th><th>Due</th><th>Returned</th><th>Fine</th></tr></thead><tbody>
+    <tr th:each="i : ${books}"><td th:text="${i.book.title}">b</td><td th:text="${i.issuedAt}">d</td><td th:text="${i.dueDate}">d</td><td th:text="${i.returnedAt != null} ? ${i.returnedAt} : '—'">r</td><td th:text="${i.fine}">0</td></tr>
+    <tr th:if="${books.isEmpty()}"><td colspan="5" class="text-muted text-center">No books issued</td></tr></tbody></table></div></div></div>
+</div>
+</section>
+</body>
+</html>

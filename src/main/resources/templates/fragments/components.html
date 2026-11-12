@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<body>
+
+<!-- Sidebar link -->
+<li class="nav-item" th:fragment="navItem(href, icon, label)">
+  <a class="nav-link" th:href="@{${href}}" th:classappend="${@nav.active(href)} ? 'active'">
+    <i class="bi" th:classappend="${icon}"></i><span th:text="${label}">Label</span>
+  </a>
+</li>
+
+<!-- KPI tile. tone: primary|success|warning|danger|info|secondary -->
+<div class="card" th:fragment="statCard(label, value, icon, tone)">
+  <div class="stat-card">
+    <div class="icon" th:classappend="'tone-' + ${tone}"><i class="bi" th:classappend="${icon}"></i></div>
+    <div class="min-w-0">
+      <div class="value" th:text="${value}">0</div>
+      <div class="label" th:text="${label}">Label</div>
+    </div>
+  </div>
+</div>
+
+<!-- Page heading -->
+<div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3" th:fragment="pageHeader(title, subtitle)">
+  <div>
+    <h2 class="page-title" th:text="${title}">Title</h2>
+    <p class="page-sub" th:if="${subtitle != null and !#strings.isEmpty(subtitle)}" th:text="${subtitle}">Subtitle</p>
+  </div>
+</div>
+
+<!-- Empty state -->
+<div class="empty" th:fragment="empty(text, icon)">
+  <i class="bi" th:classappend="${icon}"></i><span th:text="${text}">Nothing here yet</span>
+</div>
+
+<!-- Status badge: pass any enum/string -->
+<span th:fragment="badge(status)" class="badge rounded-pill" th:with="s=${status.toString()}"
+      th:classappend="${#strings.contains('ACTIVE PAID RESOLVED BOOKED COMPLETED', s)} ? 'text-bg-success' :
+                      (${#strings.contains('PENDING OPEN', s)} ? 'text-bg-warning' :
+                      (${#strings.contains('EXPIRED REJECTED FAILED CANCELLED SUSPENDED', s)} ? 'text-bg-danger' : 'text-bg-secondary'))"
+      th:text="${s}">STATUS</span>
+
+<!-- English / Marathi switch. Uses the current page (relative link keeps the path). -->
+<div th:fragment="langSwitch(dark)" class="lang-switch" th:classappend="${dark} ? 'on-dark'" role="group" aria-label="Language">
+  <a href="?lang=en" th:classappend="${lang != 'mr'} ? 'active'" lang="en">English</a>
+  <a href="?lang=mr" th:classappend="${lang == 'mr'} ? 'active'" lang="mr">मराठी</a>
+</div>
+
+<!-- All available features as colourful tiles. Only modules enabled for the library and allowed for the role are shown. -->
+<div class="row g-3" th:fragment="featureTiles">
+  <th:block sec:authorize="hasAnyRole('MEMBER','LIBRARIAN','LIBRARY_ADMIN')">
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('QR_ATTENDANCE')}"><a class="ftile ft-attendance" th:href="@{/attendance}"><i class="bi bi-qr-code-scan"></i><b>QR Attendance</b><small>Check in and out, view history</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('SUBSCRIPTIONS')}"><a class="ftile ft-subscriptions" th:href="@{/subscriptions}"><i class="bi bi-card-checklist"></i><b>Subscriptions</b><small>Plans, renewals and expiry</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('PAYMENTS')}"><a class="ftile ft-payments" th:href="@{/payments}"><i class="bi bi-cash-coin"></i><b>Payments</b><small>Cash, UPI, online and receipts</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('SEAT_BOOKING')}"><a class="ftile ft-seats" th:href="@{/seats}"><i class="bi bi-grid-3x3-gap"></i><b>Seat Booking</b><small>Your seat and availability</small></a></div>
+  </th:block>
+  <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('BOOK_MANAGEMENT')}"><a class="ftile ft-books" th:href="@{/books}"><i class="bi bi-book"></i><b>Books</b><small>Catalogue, issue and return</small></a></div>
+  <th:block sec:authorize="hasAnyRole('LIBRARIAN','LIBRARY_ADMIN')">
+    <div class="col-6 col-md-4 col-xl-3"><a class="ftile ft-members" th:href="@{/members}"><i class="bi bi-person-lines-fill"></i><b>Members</b><small>Approvals and profiles</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('GUEST_MANAGEMENT')}"><a class="ftile ft-guests" th:href="@{/guests}"><i class="bi bi-person-badge"></i><b>Guests</b><small>Visitor registration and logs</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('REPORTS')}"><a class="ftile ft-reports" th:href="@{/reports}"><i class="bi bi-graph-up"></i><b>Reports</b><small>Analytics, Excel and PDF</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('COMMUNITY_FEED') or @features.on('DISCUSSION_FORUM')}"><a class="ftile ft-moderation" th:href="@{/moderation}"><i class="bi bi-flag"></i><b>Moderation</b><small>Review reported content</small></a></div>
+  </th:block>
+  <th:block sec:authorize="hasAnyRole('MEMBER','LIBRARIAN','LIBRARY_ADMIN')">
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('COMMUNITY_FEED')}"><a class="ftile ft-feed" th:href="@{/feed}"><i class="bi bi-chat-square-heart"></i><b>Community Feed</b><small>Posts, photos, likes, comments</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('DISCUSSION_FORUM')}"><a class="ftile ft-forum" th:href="@{/forum}"><i class="bi bi-question-circle"></i><b>Discussion Forum</b><small>Ask and answer questions</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('CHAT')}"><a class="ftile ft-chat" th:href="@{/chat}"><i class="bi bi-chat-dots"></i><b>Chat</b><small>Private and group messages</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3" th:if="${@features.on('STUDY_GROUPS')}"><a class="ftile ft-groups" th:href="@{/groups}"><i class="bi bi-people"></i><b>Study Groups</b><small>Groups and shared materials</small></a></div>
+  </th:block>
+  <th:block sec:authorize="hasRole('LIBRARY_ADMIN')">
+    <div class="col-6 col-md-4 col-xl-3"><a class="ftile ft-modules" th:href="@{/admin/features}"><i class="bi bi-toggles"></i><b>Modules</b><small>Turn features on or off</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3"><a class="ftile ft-settings" th:href="@{/admin/library}"><i class="bi bi-gear"></i><b>Library Settings</b><small>Hours, address, details</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3"><a class="ftile ft-staff" th:href="@{/admin/staff}"><i class="bi bi-person-gear"></i><b>Staff</b><small>Librarians and access</small></a></div>
+    <div class="col-6 col-md-4 col-xl-3"><a class="ftile ft-audit" th:href="@{/admin/audit}"><i class="bi bi-shield-check"></i><b>Audit Log</b><small>Who did what, and when</small></a></div>
+  </th:block>
+</div>
+
+<!-- Initial avatar -->
+<span th:fragment="avatar(name)" class="avatar" th:text="${#strings.toUpperCase(#strings.substring(name,0,1))}">A</span>
+
+<!-- "Report" button for community content -->
+<button th:fragment="reportBtn(type, id)" type="button" class="btn btn-sm btn-link text-muted p-0"
+        data-bs-toggle="modal" data-bs-target="#reportModal" th:attr="data-type=${type},data-target-id=${id}" title="Report">
+  <i class="bi bi-flag"></i>
+</button>
+
+<!-- Report modal (include once per page that has reportBtn) -->
+<div th:fragment="reportModal" class="modal fade" id="reportModal" tabindex="-1" aria-hidden="true" data-fill>
+  <div class="modal-dialog modal-dialog-centered"><form class="modal-content" th:action="@{/moderation/report}" method="post">
+    <div class="modal-header"><h5 class="modal-title">Report content</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+    <div class="modal-body">
+      <input type="hidden" name="type"><input type="hidden" name="targetId">
+      <label class="form-label" for="report-reason">What is wrong with it?</label>
+      <textarea id="report-reason" name="reason" class="form-control" rows="3" maxlength="400" required></textarea>
+    </div>
+    <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-danger">Report</button></div>
+  </form></div>
+</div>
+</body>
+</html>
